@@ -28,7 +28,7 @@ const timelineData = [
   {
     id: 2,
     company: "Deloitte",
-    role: "Data Analyst - Intern (Job Simulation)",
+    role: "Data Analyst - Internship (Job Simulation)",
     period: "Apr 2025 - Apr 2025",
     location: "Remote",
     type: "Part-time",
@@ -75,26 +75,36 @@ const timelineData = [
     logo: "/company-b-logo.svg",
     skills: ["JavaScript", "React", "Node.js"],
   },
+  {
+    id: 1,
+    company: "Snaapify",
+    role: "Full Stack Developer",
+    period: "July 2025 - current",
+    location: "Hybrid",
+    type: "Full - Time",
+    logo: "/company-b-logo.svg",
+    skills: ["Typescript", "Nextjs", "express.js" , "MongoDB"],
+  },
 ]
 
 const skillsData = {
   "Programming Languages": [
-    { name: "JavaScript", proficiency: 90 },
+    { name: "JavaScript", proficiency: 80 },
     { name: "TypeScript", proficiency: 80 },
     { name: "Solidity", proficiency: 70 },
-    { name: "Go", proficiency: 60 },
+    { name: "Go", proficiency: 40 },
     { name: "Rust", proficiency: 50 },
   ],
   "Frameworks/Libraries": [
-    { name: "React", proficiency: 95 },
-    { name: "Next.js", proficiency: 85 },
+    { name: "React", proficiency: 85 },
+    { name: "Next.js", proficiency: 80 },
     { name: "Node.js", proficiency: 75 },
     { name: "Express.js", proficiency: 65 },
   ],
   Tools: [
-    { name: "Git", proficiency: 98 },
-    { name: "Docker", proficiency: 88 },
-    { name: "Kubernetes", proficiency: 78 },
+    { name: "Git", proficiency: 88 },
+    { name: "Docker", proficiency: 60 },
+    { name: "Kubernetes", proficiency: 50 },
   ],
 }
 

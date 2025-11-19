@@ -168,25 +168,29 @@ export default function Home() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <ProjectCard
-                title="Oregano Finance"
-                description="A DeFi payment gateway for secure payments with minimum gas fees via meta transaction and Efficient Crypto payments."
-                tags={["Next.js", "Firebase", "Solidity", "Web3", "Typescript", "DeFi"]}
+                title="Aptos Swap"
+                description="A trusted and protected De-Fi payment gateway for secure payments with minimum gas fees via meta transaction Cross-chain and Efficient Crypto payments."
+                tags={["Next.js", "Cross-Chain " ,"Firebase", "Solidity", "Typescript", "DeFi"]}
               />
               <ProjectCard
-                title="Cross-Chain Bridge"
-                description="Secure bridge for asset transfers between different blockchain networks."
-                tags={["Cross-Chain", "Interoperability", "DeFi"]}
+
+                title="Surge"
+                description=" A secure Game-Fi  Staking protocol made Onchain on EVM, where players can Stake their token asset and win the duals online. Its trusted and a complete mutiplayer gaming platform with proctected Stacking.
+                 & easy cashout , secure bridge for asset transfers between different chains and personal accounts."
+                tags={["On-chain", "Interoperability", "Game-Fi"]}
                 image="/images/cross-chain-bridge.jpg"
               />
               <ProjectCard
+              
                 title="LOLand"
                 description="Decentralized Social Media Meme Platform using blockchain technology . Therefore a personal Meme platform with a custom content management system for easy posting with DeFi NFTs and secure minting of tokens in a form of Meme's."
                 tags={["Rainbow Kit", "Typescript", "Blockchain", "Superbase", "Solidity", "NFT"]}
                 image="/images/decentralized-identity.jpg"
               />
               <ProjectCard
-                title="Elite Hoops"
-                description="A web app for customisable e-commerce platform with real-time collaboration features Using LLM model preferences."
+                title="Circlo"
+                description="A Rental & lending platform where users can buy or lend their unused items, on the best renting price on the market & earn Circlo tokens in exchange , you can futher exchange it to buy real-time items
+                 It is trusted and safe , easy cash-in & cash-out with real-time collaboration features Using LLM model preferences."
                 tags={["Typescript", "APIs calls", "Firebase", "Development"]}
                 image="/images/solidity-generator.jpg"
               />
@@ -195,6 +199,12 @@ export default function Home() {
                 description="A fast-paced shooting game set on a dynamic urban map where players navigate rooftops, alleys, and abandoned buildings to eliminate enemies and control key zones. Strategic positioning and map awareness are crucial to survival."
                 tags={["Typescript", "APIs calls", "Firebase", "Development"]}
                 image="/images/solidity-generator.jpg"
+              />
+               <ProjectCard
+                title="Zinko Protocol"
+                description="A trusted and protected ZK lending protocol offering private, permissionless access to global liquidity. Users can borrow and lend assets anonymously using zero-knowledge proofs, ensuring privacy without sacrificing security or transparency.
+                With Zinko, experience seamless DeFi interactions while keeping your financial activities confidential."
+                tags={["zk proofs", " zk snarks " ,"zk circuits", "Solidity", "Typescript", "DeFi"]}
               />
             </div>
           </motion.div>

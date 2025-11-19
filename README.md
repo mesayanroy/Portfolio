@@ -1,30 +1,97 @@
-# Aakash4Dev's Portfolio Website
+# Sayan Roy — Personal Portfolio (Private)
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+This repository contains the source for my personal portfolio website. It is a private portfolio project and not intended to be used as an open-source starter or cloned for other projects.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/rsayan570-gmailcoms-projects/v0-aakash4-dev-s-portfolio-website)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/sJxoOtTuOiO)
+If you are viewing this file in a public place, please note this copy is meant for demo and reference only — contact me before reusing any assets or code.
 
-## Overview
+---
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+## Quick summary
 
-## Deployment
+- Framework: Next.js (React) — the project uses Next.js with the App Router.
+- UI: Tailwind CSS + a collection of small UI components in `components/` (including `components/ui/` primitives).
+- TypeScript: the project is typed (TypeScript present in the repo).
+- 3D & visuals: the site includes Three.js/react-three components and several particle/animation components.
 
-Your project is live at:
+## Features
 
-**[https://vercel.com/rsayan570-gmailcoms-projects/v0-aakash4-dev-s-portfolio-website](https://vercel.com/rsayan570-gmailcoms-projects/v0-aakash4-dev-s-portfolio-website)**
+- Landing / intro animations
+- 3D scene powered by `three` + `@react-three/fiber`
+- Re-usable UI primitives under `components/ui/` (cards, buttons, dialogs, etc.)
+- Custom animations and particle backgrounds (`ParticleAnimation`, `ParticleBackground`, `three-scene`, etc.)
+- Small client-side hooks in `hooks/` (e.g., `use-mobile`, `use-toast`)
 
-## Build your app
+## Project structure (important files/folders)
 
-Continue building your app on:
+- `app/` — Next.js app router pages and layout; contains `globals.css` and top-level pages
+- `components/` — Shared React components used across the site
+- `components/ui/` — Small UI primitives and design system components
+- `hooks/` — Custom React hooks used by components
+- `lib/` — utility functions (helper utilities)
+- `public/` — static assets (images, icons)
+- `styles/` — additional global css and Tailwind entry
+- `package.json` — project scripts and dependencies
 
-**[https://v0.dev/chat/projects/sJxoOtTuOiO](https://v0.dev/chat/projects/sJxoOtTuOiO)**
+## Local development (Windows / PowerShell)
 
-## How It Works
+1. Install Node (LTS recommended) and pnpm (optional but recommended):
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+```powershell
+# if you prefer pnpm and don't have it
+npm install -g pnpm
+```
+
+2. Install dependencies (run from repository root):
+
+```powershell
+pnpm install
+# or if you prefer npm/yarn
+npm install
+# or
+yarn install
+```
+
+3. Start the dev server:
+
+```powershell
+pnpm dev
+# or
+npm run dev
+# or
+yarn dev
+```
+
+If you see "'next' is not recognized" when running `npm run dev`, run the install step above. If you're using a different package manager, make sure the `node_modules/.bin` folder is available in your PATH for your shell.
+
+## Build & deploy
+
+```powershell
+pnpm build
+pnpm start
+```
+
+You can deploy to Vercel, Netlify, or your preferred static/node host. The project uses Next.js server/static features — choose the appropriate platform (Vercel is recommended for easiest integration).
+
+## Customization notes
+
+- Colors / theme variables: edit `app/globals.css` (and `styles/globals.css`) — the root CSS variables control background and surface colors. This is where to change primary/secondary/foreground colors.
+- Animations: look in `components/` for animation wrappers like `AnimatedBoxes`, `ParticleAnimation` and `three-scene` for Three.js.
+- Component UI: edit primitives in `components/ui/` to adjust base spacing, typography and behavior.
+
+## Dependencies highlights
+
+- Next.js (v15+)
+- React 19
+- Tailwind CSS
+- Three.js + @react-three/fiber, @react-three/drei
+- Radix UI primitives (a subset under `@radix-ui/react-*` in `package.json`)
+
+## Notes about this repository
+
+This repository is my personal portfolio source. It contains personal content, images, and styling that belong to me. It's not packaged or intended for general distribution. If you want to reuse ideas or code, please reach out to me first.
+
+If you need help running the project or want a feature changed (for example: change site colors to a royal-red / gold / black palette), open an issue in the private tracker or contact me directly.
+
+---
+
+Thank you for taking a look — Sayan
