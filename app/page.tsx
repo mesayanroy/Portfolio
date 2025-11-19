@@ -170,7 +170,7 @@ export default function Home() {
               <ProjectCard
                 title="Aptos Swap"
                 description="A trusted and protected De-Fi payment gateway for secure payments with minimum gas fees via meta transaction Cross-chain and Efficient Crypto payments."
-                tags={["Next.js", "Cross-Chain " ,"Firebase", "Solidity", "Typescript", "DeFi"]}
+                tags={["Next.js", "Cross-Chain " ,"Move", "Solidity", "Typescript", "DeFi"]}
               />
               <ProjectCard
 
@@ -184,20 +184,20 @@ export default function Home() {
               
                 title="LOLand"
                 description="Decentralized Social Media Meme Platform using blockchain technology . Therefore a personal Meme platform with a custom content management system for easy posting with DeFi NFTs and secure minting of tokens in a form of Meme's."
-                tags={["Rainbow Kit", "Typescript", "Blockchain", "Superbase", "Solidity", "NFT"]}
+                tags={["Hardhat", "Typescript", "Nextjs", "Superbase", "Solidity", "NFT"]}
                 image="/images/decentralized-identity.jpg"
               />
               <ProjectCard
                 title="Circlo"
                 description="A Rental & lending platform where users can buy or lend their unused items, on the best renting price on the market & earn Circlo tokens in exchange , you can futher exchange it to buy real-time items
                  It is trusted and safe , easy cash-in & cash-out with real-time collaboration features Using LLM model preferences."
-                tags={["Typescript", "APIs calls", "Firebase", "Development"]}
+                tags={["Typescript", "RESTfull API", "Firebase", "Nextjs", ]}
                 image="/images/solidity-generator.jpg"
               />
               <ProjectCard
                 title="SR Games"
                 description="A fast-paced shooting game set on a dynamic urban map where players navigate rooftops, alleys, and abandoned buildings to eliminate enemies and control key zones. Strategic positioning and map awareness are crucial to survival."
-                tags={["Typescript", "APIs calls", "Firebase", "Development"]}
+                tags={["Javascript", "RESTfull API", "Firebase", "GunJS", ]}
                 image="/images/solidity-generator.jpg"
               />
                <ProjectCard
