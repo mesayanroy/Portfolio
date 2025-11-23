@@ -1,4 +1,4 @@
-# Sayan Roy — Personal Portfolio (Private)
+# Sayan Roy — Personal Portfolio 
 
 This repository contains the source for my personal portfolio website. It is a private portfolio project and not intended to be used as an open-source starter or cloned for other projects.
 
