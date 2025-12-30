@@ -1,98 +1,135 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { motion, useAnimation } from "framer-motion"
+import { motion } from "framer-motion"
+
+const languages = [
+  { lang: "Hello", color: "rgba(92, 90, 190, 1)" }, // English - Red
+  { lang: "こんにちは", color: "rgba(236, 72, 153, 1)" }, // Japanese - Pink
+  { lang: "नमस्ते", color: "rgba(249, 228, 6, 1)" }, // Hindi - Gold
+  { lang: "你好", color: "rgba(237, 7, 7, 1)" }, // Mandarin - Red
+  { lang: "Bonjour", color: "rgba(5, 250, 168, 1)" }, // French - Pink
+]
 
 export default function Loading() {
-  const [progress, setProgress] = useState(0)
-  const controls = useAnimation()
+  const [currentLangIndex, setCurrentLangIndex] = useState(0)
 
   useEffect(() => {
-    const duration = 12 // Total duration in seconds (increased from 6 to 18 for 3x slower)
-    const interval = 50 // Update interval in milliseconds
+    const interval = setInterval(() => {
+      setCurrentLangIndex((prev) => (prev + 1) % languages.length)
+    }, 400) // Change language every 0.7 seconds
 
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + 100 / ((duration * 500) / interval)
-        if (next >= 100) {
-          clearInterval(timer)
-          return 100
-        }
-        return next
-      })
-    }, interval)
-
-    return () => clearInterval(timer)
+    return () => clearInterval(interval)
   }, [])
 
-  useEffect(() => {
-    controls.start({ width: `${progress}%` })
-  }, [progress, controls])
-
   return (
-    <div className="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center">
-      <div className="w-64 relative">
-        {/* Main loading bar container */}
-        <div className="h-2 w-full bg-gray-800 rounded-full overflow-hidden relative">
-          {/* Gradient background */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600"
-            initial={{ x: "-100%" }}
-            animate={{ x: "0%" }}
-            transition={{
-              repeat: Number.POSITIVE_INFINITY,
-              duration: 6, // Increased from 2 to 6 for slower background animation
-              ease: "linear",
-            }}
-          />
-
-          {/* Progress bar */}
-          <motion.div
-            className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
-            initial={{ width: 0 }}
-            animate={controls}
-            transition={{ duration: 0.1 }} // Added a small duration for smoother animation
-          />
-
-          {/* Glow effect */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-sm"
-            initial={{ width: 0 }}
-            animate={controls}
-            transition={{ duration: 0.1 }} // Added a small duration for smoother animation
-          />
-        </div>
-
-        {/* Percentage text */}
-        <div className="mt-4 text-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
-          >
-            {Math.round(progress)}%
-          </motion.div>
-        </div>
-
-        {/* Loading text with glitch effect */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-b from-black via-[#0c0c0c] to-black">
+      <div className="relative flex flex-col items-center justify-center">
+        {/* Background gradient circles */}
         <motion.div
-          className="mt-2 text-center text-gray-400 text-sm relative"
+          className="absolute w-40 h-40 rounded-full blur-3xl"
+          style={{
+            background: "radial-gradient(circle, rgba(237,7,7,0.15) 0%, rgba(237,7,7,0) 70%)",
+          }}
           animate={{
-            textShadow: [
-              "0 0 0px rgba(139, 92, 246, 0)",
-              "0 0 2px rgba(139, 92, 246, 0.5)",
-              "0 0 0px rgba(139, 92, 246, 0)",
-            ],
+            scale: [1, 1.2, 1],
+            opacity: [0.5, 0.8, 0.5],
           }}
           transition={{
-            duration: 2,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "linear",
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
           }}
-        >
-          Loading...
+        />
+        <motion.div
+          className="absolute w-40 h-40 rounded-full blur-3xl"
+          style={{
+            background: "radial-gradient(circle, rgba(249,228,6,0.15) 0%, rgba(249,228,6,0) 70%)",
+          }}
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.5, 0.8, 0.5],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
+        />
+
+        {/* Language text container */}
+        <div className="relative h-24 w-64 flex items-center justify-center">
+          <AnimatedLanguage
+            key={currentLangIndex}
+            lang={languages[currentLangIndex].lang}
+            color={languages[currentLangIndex].color}
+          />
+        </div>
+
+        {/* Loading indicator dots */}
+        <motion.div className="mt-12 flex gap-2 justify-center">
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="w-2 h-2 rounded-full"
+              style={{
+                background: "linear-gradient(135deg, rgba(237,7,7,1) 0%, rgba(249,228,6,1) 100%)",
+              }}
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 1.2,
+                repeat: Infinity,
+                delay: i * 0.2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
         </motion.div>
+
+        {/* Loading text */}
+        <motion.p
+          className="mt-6 text-gray-400 text-sm font-mono"
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          Loading your portfolio...
+        </motion.p>
       </div>
     </div>
+  )
+}
+
+function AnimatedLanguage({ lang, color }: { lang: string; color: string }) {
+  return (
+    <motion.div
+      className="absolute text-center"
+      initial={{ opacity: 0, scale: 0.5, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.5, y: -20 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      <motion.h1
+        className="text-5xl md:text-6xl font-bold font-mono italic"
+        style={{ color }}
+        animate={{
+          textShadow: [
+            `0 0 10px ${color}00`,
+            `0 0 30px ${color}40`,
+            `0 0 10px ${color}00`,
+          ],
+        }}
+        transition={{
+          duration: 1.2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      >
+        {lang}
+      </motion.h1>
+    </motion.div>
   )
 }

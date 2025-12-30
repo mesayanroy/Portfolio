@@ -35,7 +35,10 @@ export default function ChatbotOverlay({ isOpen, onClose }: ChatbotOverlayProps)
 
   const myDescription =
     "I'm a passionate developer skilled in🚀 Full-Stack Developer | Web3 Enthusiast | Open for CollaborationHi, I'm Sayan Roy, a passionate full-stack developer currently in my second year at Sister Nivedita University (SNU), with a strong enthusiasm for Web3 and blockchain technologies. I have hands-on experience in Solidity and can develop and deploy decentralized applications (dApps) seamlessly. Always eager to learn, adapt, and innovate, I thrive in dynamic environments and love collaborating with like-minded individuals to build impactful solutions Current building Oregano Finance Let's connect and build something amazing together! 🚀. I Love FOOTBALL and my hobbies are music, traveling, playing football . I'm personally learning LANGChain ,  L1, L2 WALLETS, and Quant finance right now also LLM models, Researching on Gasless payements and blockchain technology,A disciplined and goal-oriented individual based in Kolkata, West Bengal, India, with a solid understanding of Large Language Models (LLMs) and foundational knowledge of machine learning. He possesses strong expertise in the blockchain ecosystem and is actively seeking opportunities to make valuable contributions. Open to work and collaboration, he is committed to continuous growth and delivering meaningful impact through technology.  "
-  const apiKey = "AIzaSyB7EIP5Dz7CrOzgLdrFQSucEaGEI4euCaA"
+  
+  // API key from environment variables (set in .env.local)
+  // Get your key from: https://makersuite.google.com/app/apikey
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -66,8 +69,12 @@ export default function ChatbotOverlay({ isOpen, onClose }: ChatbotOverlayProps)
     setIsLoading(true)
 
     try {
+      if (!apiKey) {
+        throw new Error("API key not configured")
+      }
+
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -86,7 +93,9 @@ export default function ChatbotOverlay({ isOpen, onClose }: ChatbotOverlayProps)
       )
 
       if (!response.ok) {
-        throw new Error("Failed to get response")
+        const errorData = await response.json().catch(() => ({}))
+        console.error("API Error:", response.status, errorData)
+        throw new Error(`API Error: ${response.status} ${response.statusText}`)
       }
 
       const data = await response.json()
@@ -103,10 +112,24 @@ export default function ChatbotOverlay({ isOpen, onClose }: ChatbotOverlayProps)
 
       setMessages((prev) => [...prev, aiMessage])
     } catch (error) {
-      console.error("Error:", error)
+      console.error("Chatbot Error:", error)
+      let errorText = "Oops! Something went wrong. Please try again later. 😅"
+      
+      if (error instanceof Error) {
+        if (error.message.includes("API key not configured")) {
+          errorText = "⚠️ API key is not configured. Please check your environment variables."
+        } else if (error.message.includes("401")) {
+          errorText = "⚠️ Invalid API key. Please check your Gemini API key."
+        } else if (error.message.includes("429")) {
+          errorText = "⚠️ Rate limit exceeded. Please try again in a moment."
+        } else if (error.message.includes("Failed to fetch")) {
+          errorText = "⚠️ Network error. Please check your internet connection."
+        }
+      }
+
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: "Oops! Something went wrong. Please try again later. 😅",
+        text: errorText,
         isUser: false,
         timestamp: new Date(),
       }

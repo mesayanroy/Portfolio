@@ -65,12 +65,45 @@ If you see "'next' is not recognized" when running `npm run dev`, run the instal
 
 ## Build & deploy
 
+### Environment Setup
+
+Before building or deploying, create a `.env.local` file with your API keys:
+
+```bash
+# Copy the example file
+cp .env.example .env.local
+
+# Then edit .env.local and add your Gemini API key
+NEXT_PUBLIC_GEMINI_API_KEY=your_actual_api_key_here
+```
+
+Get your Gemini API key from: https://makersuite.google.com/app/apikey
+
+### Production Build
+
 ```powershell
+# Build for production
 pnpm build
+
+# Test the production build locally
 pnpm start
 ```
 
-You can deploy to Vercel, Netlify, or your preferred static/node host. The project uses Next.js server/static features — choose the appropriate platform (Vercel is recommended for easiest integration).
+### Deployment Platforms
+
+**Vercel (Recommended):**
+1. Push your code to GitHub
+2. Import project in Vercel
+3. Add `NEXT_PUBLIC_GEMINI_API_KEY` in Environment Variables
+4. Deploy
+
+**Netlify:**
+1. Build command: `pnpm build`
+2. Publish directory: `.next`
+3. Add environment variables in Netlify dashboard
+
+**Other platforms:**
+The project uses Next.js features — choose a platform that supports Node.js or static export.
 
 ## Customization notes
 

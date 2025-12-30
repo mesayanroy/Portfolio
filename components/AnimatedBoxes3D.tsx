@@ -5,6 +5,13 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import * as THREE from "three"
 
+// Type declaration for three module
+declare module "three" {
+  export interface Vector3 {}
+  export interface Color {}
+  export interface Mesh {}
+}
+
 function Box({ position, color }: { position: [number, number, number]; color: THREE.Color }) {
   const mesh = useRef<THREE.Mesh>(null!)
   const [hovered, setHovered] = useState(false)
