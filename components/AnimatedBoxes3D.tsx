@@ -5,25 +5,25 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import * as THREE from "three"
 
-// Type declaration for three module
-declare module "three" {
-  export interface Vector3 {}
-  export interface Color {}
-  export interface Mesh {}
+interface BoxProps {
+  position: [number, number, number]
+  color: THREE.Color
 }
 
-function Box({ position, color }: { position: [number, number, number]; color: THREE.Color }) {
+function Box({ position, color }: BoxProps) {
   const mesh = useRef<THREE.Mesh>(null!)
   const [hovered, setHovered] = useState(false)
 
-  useFrame((state, delta) => {
-    mesh.current.rotation.x += delta * 0.2
-    mesh.current.rotation.y += delta * 0.3
+  useFrame((_state, delta) => {
+    if (mesh.current) {
+      mesh.current.rotation.x += delta * 0.2
+      mesh.current.rotation.y += delta * 0.3
+    }
   })
 
   return (
     <mesh
-      position={position}
+      position={position as any}
       ref={mesh}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
@@ -35,9 +35,14 @@ function Box({ position, color }: { position: [number, number, number]; color: T
   )
 }
 
+interface BoxItem {
+  position: [number, number, number]
+  color: THREE.Color
+}
+
 function BoxesGroup() {
-  const boxes = useMemo(() => {
-    const temp = []
+  const boxes = useMemo((): BoxItem[] => {
+    const temp: BoxItem[] = []
     for (let i = 0; i < 100; i++) {
       const position: [number, number, number] = [
         (Math.random() - 0.5) * 10,
@@ -63,7 +68,9 @@ export default function AnimatedBoxes3D() {
   return (
     <div className="absolute inset-0">
       <Canvas camera={{ position: [0, 0, 15], fov: 60 }}>
+        {/* @ts-ignore */}
         <ambientLight intensity={0.2} />
+        {/* @ts-ignore */}
         <pointLight position={[10, 10, 10]} intensity={0.8} />
         <BoxesGroup />
         <OrbitControls enableZoom={false} enablePan={false} />
