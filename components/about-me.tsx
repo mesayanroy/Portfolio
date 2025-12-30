@@ -120,9 +120,9 @@ export default function AboutMe() {
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
-              Code, Coffee & Me
+              
             </span>
-            <span className="ml-2">☕💻</span>
+            <span className="ml-2" style={{ fontFamily: '"Segoe UI Symbol"', color: "rgba(255, 255, 255, 1)" }}>☕💻</span>
           </h2>
           {/* Profile Section */}
           <div className="flex flex-col md:flex-row-reverse items-center gap-8 mb-16">
@@ -133,10 +133,15 @@ export default function AboutMe() {
                   alt="Sayan Roy"
                   fill
                   className="rounded-lg object-cover shadow-lg"
+                  style={{
+                    borderWidth: "1px",
+                    borderColor: "rgba(233, 1, 1, 1)",
+                    color: "rgba(250, 254, 11, 1)"
+                  }}
                 />
               </div>
             </div>
-            <div className="md:w-2/3">
+            <div className="md:w-2/3" style={{ color: "rgba(255, 255, 255, 1)" }}>
               <div className="prose prose-invert max-w-none text-center md:text-left">
                 {/* Mobile description */}
                 <p className="text-lg leading-relaxed md:hidden">
@@ -146,17 +151,18 @@ export default function AboutMe() {
                 {/* Desktop description */}
                 <div className="hidden md:block">
                   <p className="text-xl mb-4">
-                    🚀 <strong>Hey, I'm Sayan Roy!</strong>
+                     <strong></strong>
                   </p>
                   <p className="mb-4">
-                    A <strong>Blockchain Wizard 🧙‍♂️</strong> and <strong>Full Stack Alchemist 💻</strong>, turning{" "}
+                    A <strong className="text-[rgba(255,0,0,1)]">Blockchain Wizard 🧙‍♂️</strong> and{" "}
+                    <strong style={{ color: "rgba(255, 0, 0, 1)" }}>Full Stack Alchemist 💻</strong>, turning{" "}
                     <strong>lines of code</strong> into <strong>decentralized magic</strong>! Whether it's{" "}
                     <strong>smart contracts</strong>, <strong>ZK proofs</strong>, or <strong>FHE sorcery</strong>, I
                     love pushing Web3 to the next level.
                   </p>
                   <p className="mb-4">
                     I spend my days <strong>hacking away in Solidity, Go, and Rust</strong>—and my nights wondering why
-                    gas fees still exist. 😅 When I'm not coding, I'm probably deep-diving into{" "}
+                    gas fees still exist. When I'm not coding, I'm probably deep-diving into{" "}
                     <strong>DeFi rabbit holes</strong>, contributing to <strong>open-source chaos</strong>, or
                     evangelizing blockchain to anyone who'll listen (or can't escape).
                   </p>
@@ -193,8 +199,16 @@ export default function AboutMe() {
                     className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-8 relative`}
                   >
                     {/* Content */}
-                    <div className="md:w-1/2 p-6 bg-gray-900/50 rounded-xl backdrop-blur-sm border border-gray-800">
-                      <div className="flex flex-col md:flex-row items-center gap-4">
+                    <div 
+                      className="md:w-1/2 p-6 bg-gray-900/50 rounded-xl backdrop-blur-sm border border-gray-800"
+                      style={{
+                        color: "rgba(5, 5, 5, 1)",
+                        backgroundColor: "rgba(18, 18, 18, 0.5)",
+                        borderColor: "rgba(250, 0, 0, 1)",
+                        fontFamily: '"__nextjs-Geist Mono"'
+                      }}
+                    >
+                      <div className="flex flex-col md:flex-row items-center gap-4" style={{ color: "rgba(0, 0, 0, 1)" }}>
                         <div className="w-16 h-16 md:w-12 md:h-12 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden mb-4 md:mb-0 mx-auto md:mx-0">
                           <Image
                             src={item.logo || "/placeholder.svg"}
@@ -202,11 +216,17 @@ export default function AboutMe() {
                             width={56}
                             height={56}
                             className="rounded-full"
+                            style={{ color: "rgba(228, 221, 221, 1)" }}
                           />
                         </div>
                         <div className="text-center md:text-left">
                           <h3 className="text-xl font-bold text-white">{item.role}</h3>
-                          <h4 className="text-lg text-purple-400">{item.company}</h4>
+                          <h4
+                            className="text-lg text-purple-400"
+                            style={{ color: "rgba(209, 35, 114, 1)" }}
+                          >
+                            {item.company}
+                          </h4>
                           <div className="flex items-center justify-center md:justify-start gap-2 text-gray-400 mt-1">
                             <Calendar className="w-4 h-4" />
                             <span className="text-sm">{item.period}</span>
@@ -227,6 +247,7 @@ export default function AboutMe() {
                             <span
                               key={skillIndex}
                               className="px-3 py-1 text-sm rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-300 border border-purple-500/20"
+                              style={{ borderColor: skillIndex === 0 ? "rgba(240, 0, 0, 0.2)" : undefined }}
                             >
                               {skill}
                             </span>
@@ -256,16 +277,26 @@ export default function AboutMe() {
 
           {/* Skills Section */}
           <div>
-            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+            <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center" style={{ color: "rgba(222, 23, 23, 1)" }}>
+              <span
+                className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500"
+                style={{ color: "transparent" }}
+              >
                 Code Arsenal
               </span>
               <span className="ml-2 text-white">⚔️</span>
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {Object.entries(skillsData).map(([category, skills]) => (
-                <div key={category} className="p-6 bg-gray-900/50 rounded-xl backdrop-blur-sm border border-gray-800">
-                  <h4 className="text-xl font-bold mb-4 text-purple-400 text-center md:text-left">{category}</h4>
+                <div 
+                  key={category} 
+                  className="p-6 bg-gray-900/50 rounded-xl backdrop-blur-sm border border-gray-800"
+                  style={{
+                    borderColor: "rgba(254, 6, 6, 1)",
+                    backgroundColor: "rgba(0, 0, 0, 0.5)"
+                  }}
+                >
+                  <h4 className="text-xl font-bold mb-4 text-purple-400 text-center md:text-left" style={{ color: "rgba(228, 232, 236, 1)" }}>{category}</h4>
                   {skills.map((skill) => (
                     <SkillBar key={skill.name} name={skill.name} proficiency={skill.proficiency} />
                   ))}
@@ -279,7 +310,7 @@ export default function AboutMe() {
   )
 }
 
-function SkillBar({ name, proficiency }) {
+function SkillBar({ name, proficiency }: { name: string; proficiency: number }) {
   return (
     <div className="mb-4">
       <div className="flex justify-between mb-1">
@@ -292,6 +323,10 @@ function SkillBar({ name, proficiency }) {
           whileInView={{ width: `${proficiency}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
           className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
+          style={{
+            background: "linear-gradient(90deg, rgba(245, 0, 0, 1) 23%, rgba(246, 214, 4, 1) 100%)",
+            color: "rgba(255, 31, 31, 1)"
+          }}
         />
       </div>
     </div>

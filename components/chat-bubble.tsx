@@ -27,8 +27,16 @@ export default function ChatBubble({ onClick, isOpen }: ChatBubbleProps) {
             exit={{ opacity: 0, x: 20 }}
             className="absolute bottom-16 right-0 mb-2 mr-2"
           >
-            <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg shadow-lg max-w-xs">
-              <p className="text-sm font-medium">Ask anything about me! 💬</p>
+            <div 
+              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg shadow-lg max-w-xs"
+              style={{
+                background: "linear-gradient(55deg, rgba(0, 0, 0, 1) 46%, rgba(0, 0, 0, 1) 51%)",
+                fontFamily: '"Noto Color Emoji"',
+                color: "rgba(0, 0, 0, 1)",
+                opacity: 0.78
+              }}
+            >
+              <p className="text-sm font-medium" style={{ color: "rgba(242, 242, 243, 1)", opacity: 0.99 }}>Ask anything about me! 💬</p>
               <div className="absolute bottom-0 right-4 transform translate-y-1/2 rotate-45 w-2 h-2 bg-purple-600"></div>
             </div>
           </motion.div>
@@ -40,6 +48,10 @@ export default function ChatBubble({ onClick, isOpen }: ChatBubbleProps) {
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
         className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center text-white hover:shadow-xl transition-all duration-300"
+        style={{
+          background: "linear-gradient(232deg, rgba(230, 0, 0, 1) 39%, rgba(236, 72, 153, 1) 100%)",
+          opacity: 0.73
+        }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         animate={{
@@ -65,7 +77,7 @@ export default function ChatBubble({ onClick, isOpen }: ChatBubbleProps) {
               exit={{ rotate: -90, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <MessageCircle size={24} />
+              <MessageCircle size={24} style={{ color: "rgba(255, 255, 255, 1)" }} />
             </motion.div>
           )}
         </AnimatePresence>

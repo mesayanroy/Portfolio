@@ -68,15 +68,29 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+            <h1 
+              className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 bg-clip-text text-transparent"
+              style={{
+                fontFamily: '"Noto Color Emoji"',
+                backgroundImage: "linear-gradient(178deg, rgba(255, 0, 0, 1) 42%, rgba(236, 72, 153, 1) 50%, rgba(255, 234, 0, 1) 100%)",
+                WebkitBackgroundClip: "text",
+                color: "transparent"
+              }}
+            >
               Hey! It's Sayan Roy
             </h1>
-            <h2 className="text-xl md:text-2xl mb-8 text-gray-300">
-              🚀 Blockchain Innovator | Full-Stack Developer | Tech Explorer
+            <h2 
+              className="text-xl md:text-2xl mb-8 text-gray-300"
+              style={{ fontFamily: '"__nextjs-Geist Mono"' }}
+            >
+               Blockchain Innovator | Full-Stack Developer | Tech Explorer
             </h2>
             <div className="flex flex-wrap justify-center gap-4">
               <ScrollLink to="work" smooth={true} duration={500}>
-                <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white">
+                <Button 
+                  className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
+                  style={{ background: "linear-gradient(214deg, rgba(234, 52, 6, 1) 0%, rgba(219, 39, 119, 1) 56%)" }}
+                >
                   View Projects
                 </Button>
               </ScrollLink>
@@ -84,6 +98,7 @@ export default function Home() {
                 <Button
                   variant="outline"
                   className="bg-transparent border-2 border-purple-500 text-white hover:bg-purple-500 hover:text-white transition-all duration-300"
+                  style={{ borderColor: "rgba(255, 0, 0, 1)" }}
                 >
                   Contact Me
                 </Button>
@@ -94,7 +109,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-gradient-to-b from-black to-gray-900">
+      <section id="about" className="py-20 bg-gradient-to-b from-black to-gray-900" style={{ color: "rgba(255, 31, 31, 1)" }}>
         <div className="container px-4 mx-auto">
           <AboutMe />
         </div>
@@ -108,16 +123,24 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            style={{ fontFamily: "-apple-system" }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+              <span 
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: "linear-gradient(0deg, rgba(237, 7, 7, 1) 27%, rgba(249, 228, 6, 1) 64%)",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent"
+                }}
+              >
                 My Expertise
               </span>
               <span className="ml-2 text-white">🛠️</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <ServiceCard
-                icon={<Blocks className="w-10 h-10 text-purple-500" />}
+                icon={<Blocks className="w-10 h-10 text-purple-500" style={{ color: "rgba(247, 85, 85, 1)" }} />}
                 title="Blockchain Development"
                 description="Custom blockchain solutions, smart contracts, and decentralized applications with a focus on security and efficiency."
               />
@@ -127,7 +150,7 @@ export default function Home() {
                 description="Zero-knowledge proofs and fully homomorphic encryption solutions for privacy-preserving applications."
               />
               <ServiceCard
-                icon={<Braces className="w-10 h-10 text-purple-500" />}
+                icon={<Braces className="w-10 h-10 text-purple-500" style={{ color: "rgba(254, 11, 11, 1)" }} />}
                 title="Full Stack Development"
                 description="End-to-end web application development with modern frameworks and best practices."
               />
@@ -137,7 +160,7 @@ export default function Home() {
                 description="Comprehensive security audits for smart contracts to identify vulnerabilities and ensure robust implementation."
               />
               <ServiceCard
-                icon={<Github className="w-10 h-10 text-purple-500" />}
+                icon={<Github className="w-10 h-10 text-purple-500" style={{ color: "rgba(247, 85, 85, 1)" }} />}
                 title="Web3 Integration"
                 description="Seamless integration of Web3 technologies into existing applications and platforms."
               />
@@ -160,8 +183,19 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+            <h2 
+              className="text-3xl md:text-4xl font-bold mb-12 text-center"
+              style={{ fontFamily: '"__nextjs-Geist Mono"' }}
+            >
+              <span 
+                className="bg-clip-text text-transparent"
+                style={{
+                  fontFamily: '"Noto Color Emoji"',
+                    backgroundImage: "linear-gradient(90deg, rgba(240, 24, 0, 1) 0%, rgba(249, 217, 11, 1) 100%)",
+                    WebkitBackgroundClip: "text",
+                    color: "transparent"
+                }}
+              >
                 What I've Built
               </span>
               <span className="ml-2 text-white">🏗️</span>
@@ -212,7 +246,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-black">
+      <section id="contact" className="py-20 bg-black" style={{ fontFamily: "Geist" }}>
         <div className="container px-4 mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
@@ -334,7 +368,10 @@ export default function Home() {
 
 function ServiceCard({ icon, title, description }) {
   return (
-    <div className="p-6 rounded-lg bg-gray-900 border border-gray-800 hover:border-purple-500 transition-all duration-300 text-center md:text-left">
+    <div 
+      className="p-6 rounded-lg bg-gray-900 border border-gray-800 hover:border-red-500 transition-all duration-300 text-center md:text-left"
+      style={{ borderColor: "rgba(255, 0, 0, 1)" }}
+    >
       <div className="mb-4 flex justify-center md:justify-start">{icon}</div>
       <h3 className="text-xl font-bold mb-3 text-white">{title}</h3>
       <p className="text-gray-400">{description}</p>
@@ -344,7 +381,13 @@ function ServiceCard({ icon, title, description }) {
 
 function ProjectCard({ title, description, tags, image }) {
   return (
-    <div className="p-6 rounded-lg bg-gray-900 border border-gray-800 hover:border-purple-500 transition-all duration-300">
+    <div 
+      className="p-6 rounded-lg bg-gray-900 border border-gray-800 hover:border-red-500 transition-all duration-300"
+      style={{ 
+        borderColor: "rgba(255, 0, 0, 1)",
+        backgroundColor: "rgba(0, 0, 0, 1)"
+      }}
+    >
       <h3 className="text-xl font-bold mb-3 text-white text-center md:text-left">{title}</h3>
       <p className="text-gray-400 mb-4 text-center md:text-left">{description}</p>
       <div className="flex flex-wrap justify-center md:justify-start gap-2">
