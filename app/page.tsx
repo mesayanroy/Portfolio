@@ -429,44 +429,41 @@ export default function Home() {
                 title="Aptos Swap"
                 description="A trusted and protected De-Fi payment gateway for secure payments with minimum gas fees via meta transaction Cross-chain and Efficient Crypto payments."
                 tags={["Next.js", "Cross-Chain " ,"Move", "Solidity", "Typescript", "DeFi"]}
-                image="https://images.unsplash.com/photo-1612198526185-4c5c4d1d8b66?auto=format&fit=crop&w=1200&q=80"
-                liveUrl="https://example.com/aptos-swap"
+                image="/projects/aptos-swap.png"
+                liveUrl="https://github.com/mesayanroy/AptosSwap"
                 demoUrl="https://example.com/aptos-swap-demo"
               />
               <ProjectCard
-
                 title="Surge"
                 description=" A secure Game-Fi  Staking protocol made Onchain on EVM, where players can Stake their token asset and win the duals online. Its trusted and a complete mutiplayer gaming platform with proctected Stacking.
                  & easy cashout , secure bridge for asset transfers between different chains and personal accounts."
                 tags={["On-chain", "Interoperability", "Game-Fi"]}
-                image="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80"
-                liveUrl="https://example.com/surge"
+                image="/projects/surge.png"
+                liveUrl="https://github.com/mesayanroy/Surge"
                 demoUrl="https://example.com/surge-demo"
               />
               <ProjectCard
-              
                 title="LOLand"
                 description="Decentralized Social Media Meme Platform using blockchain technology . Therefore a personal Meme platform with a custom content management system for easy posting with DeFi NFTs and secure minting of tokens in a form of Meme's."
                 tags={["Hardhat", "Typescript", "Nextjs", "Superbase", "Solidity", "NFT"]}
-                image="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
-                liveUrl="https://example.com/loland"
+                image="/projects/loland.png"
+                liveUrl="https://github.com/mesayanroy/LOLand"
                 demoUrl="https://example.com/loland-demo"
               />
               <ProjectCard
-                title="Circlo"
-                description="A Rental & lending platform where users can buy or lend their unused items, on the best renting price on the market & earn Circlo tokens in exchange , you can futher exchange it to buy real-time items
-                 It is trusted and safe , easy cash-in & cash-out with real-time collaboration features Using LLM model preferences."
-                tags={["Typescript", "RESTfull API", "Firebase", "Nextjs", ]}
-                image="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=80"
-                liveUrl="https://example.com/circlo"
-                demoUrl="https://example.com/circlo-demo"
+                title="Opus"
+                description="Create your own AI trading Agents that will do the trade and maintain your trading portfolio , ask them them to do swaps, DEX , CEX , Sell, Buy or liquidate assests on your will with easy cash in and cash out. Featuring real-time market analysis, automated trading insights, multi-chain wallet support, and copy trading capabilities.."
+                tags={["Typescript", "RESTfull API", "langchain", "Nextjs", "lang-graph" , "Onchain" , "AI" , "Crypto-Trade" ]}
+                image="/projects/opus.png"
+                liveUrl="https://opus-cryptotrade.vercel.app/"
+                demoUrl="https://example.com/opus-demo"
               />
               <ProjectCard
                 title="SR Games"
                 description="A fast-paced shooting game set on a dynamic urban map where players navigate rooftops, alleys, and abandoned buildings to eliminate enemies and control key zones. Strategic positioning and map awareness are crucial to survival."
                 tags={["Javascript", "RESTfull API", "Firebase", "GunJS", ]}
-                image="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80"
-                liveUrl="https://example.com/sr-games"
+                image="/projects/sr-games.png"
+                liveUrl="https://sr-games.vercel.app/"
                 demoUrl="https://example.com/sr-games-demo"
               />
                <ProjectCard
@@ -474,8 +471,8 @@ export default function Home() {
                 description="A trusted and protected ZK lending protocol offering private, permissionless access to global liquidity. Users can borrow and lend assets anonymously using zero-knowledge proofs, ensuring privacy without sacrificing security or transparency.
                 With Zinko, experience seamless DeFi interactions while keeping your financial activities confidential."
                 tags={["zk proofs", " zk snarks " ,"zk circuits", "Solidity", "Typescript", "DeFi"]}
-                image="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80"
-                liveUrl="https://example.com/zinko"
+                image="/projects/zinko.png"
+                liveUrl="https://github.com/mesayanroy/dashboard-zinko"
                 demoUrl="https://example.com/zinko-demo"
               />
             </div>

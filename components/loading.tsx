@@ -96,7 +96,7 @@ export default function Loading() {
           animate={{ opacity: [0.6, 1, 0.6] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
         >
-          Loading your portfolio...
+          Loading portfolio...
         </motion.p>
       </div>
     </div>
