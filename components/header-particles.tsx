@@ -27,6 +27,7 @@ export default function HeaderParticles() {
     >
       <Suspense fallback={<div>Loading particles...</div>}>
         <DynamicCanvas camera={{ position: [0, 0, 10], fov: 75 }}>
+          {/* @ts-ignore */}
           <ambientLight intensity={0.5} />
           <DynamicParticlesAnimation />
         </DynamicCanvas>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client"
 
 import { useRef } from "react"
@@ -5,7 +6,7 @@ import { Canvas } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import dynamic from "next/dynamic"
 import * as THREE from "three"
-import FloatingBoxes from "./floating-boxes"
+import AnimatedBoxes3D from "./AnimatedBoxes3D"
 import ParticlesAnimation from "./particles-animation"
 
 function Scene() {
@@ -30,7 +31,7 @@ function Scene() {
   return (
     <group ref={groupRef}>
       <ParticlesAnimation />
-      <FloatingBoxes />
+      <AnimatedBoxes3D />
     </group>
   )
 }

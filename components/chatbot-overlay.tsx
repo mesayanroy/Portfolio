@@ -32,9 +32,14 @@ export default function ChatbotOverlay({ isOpen, onClose }: ChatbotOverlayProps)
   const [isLoading, setIsLoading] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  
+  // Rate limiting: Track requests to prevent hitting API limits
+  const requestTimesRef = useRef<number[]>([])
+  const MAX_REQUESTS_PER_MINUTE = 15
+  const COOLDOWN_MS = 1000 // 1 second cooldown
 
   const myDescription =
-    "I'm a passionate developer skilled in🚀 Full-Stack Developer | Web3 Enthusiast | Open for CollaborationHi, I'm Sayan Roy, a passionate full-stack developer currently in my second year at Sister Nivedita University (SNU), with a strong enthusiasm for Web3 and blockchain technologies. I have hands-on experience in Solidity and can develop and deploy decentralized applications (dApps) seamlessly. Always eager to learn, adapt, and innovate, I thrive in dynamic environments and love collaborating with like-minded individuals to build impactful solutions Current building Oregano Finance Let's connect and build something amazing together! 🚀. I Love FOOTBALL and my hobbies are music, traveling, playing football . I'm personally learning LANGChain ,  L1, L2 WALLETS, and Quant finance right now also LLM models, Researching on Gasless payements and blockchain technology,A disciplined and goal-oriented individual based in Kolkata, West Bengal, India, with a solid understanding of Large Language Models (LLMs) and foundational knowledge of machine learning. He possesses strong expertise in the blockchain ecosystem and is actively seeking opportunities to make valuable contributions. Open to work and collaboration, he is committed to continuous growth and delivering meaningful impact through technology.  "
+    "I'm Sayan Roy, a full-stack developer and Web3 enthusiast. I'm in my second year at Sister Nivedita University. I have hands-on experience with Solidity, Move , Rust , EVMs & SVMs smart contracts, and blockchain,  auditing transactions , working on rush nodes onchain on solana and ethereum. Currently building Opus and GhostLend Protocol. I'm learning LLMs, blockchain wallets, and quant finance. My hobbies are football, music, and traveling. I'hv also built full stack projects both you can see in my github porfile I'm based in Kolkata, India. Feel free to reach out if you have any questions or opportunities!"
   
   // API key from environment variables (set in .env.local)
   // Get your key from: https://makersuite.google.com/app/apikey
@@ -57,6 +62,37 @@ export default function ChatbotOverlay({ isOpen, onClose }: ChatbotOverlayProps)
   const sendMessage = async () => {
     if (!inputText.trim() || isLoading) return
 
+    // Check rate limiting
+    const now = Date.now()
+    requestTimesRef.current = requestTimesRef.current.filter((time) => now - time < 60000) // Keep only last minute
+    
+    if (requestTimesRef.current.length >= MAX_REQUESTS_PER_MINUTE) {
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "⏱️ Too many requests. Please wait a moment before sending another message.",
+        isUser: false,
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, errorMessage])
+      return
+    }
+
+    // Check cooldown
+    const lastRequestTime = requestTimesRef.current[requestTimesRef.current.length - 1]
+    if (lastRequestTime && now - lastRequestTime < COOLDOWN_MS) {
+      const waitTime = Math.ceil((COOLDOWN_MS - (now - lastRequestTime)) / 1000)
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: `⏱️ Please wait ${waitTime}s before sending another message.`,
+        isUser: false,
+        timestamp: new Date(),
+      }
+      setMessages((prev) => [...prev, errorMessage])
+      return
+    }
+
+    requestTimesRef.current.push(now)
+
     const userMessage: Message = {
       id: Date.now().toString(),
       text: inputText,
@@ -73,35 +109,62 @@ export default function ChatbotOverlay({ isOpen, onClose }: ChatbotOverlayProps)
         throw new Error("API key not configured")
       }
 
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [
-              {
-                parts: [
-                  {
-                    text: `User_message:${inputText}. Reply naturally to the usermessage and if required then answer based on: ${myDescription} or just simply give friendly reply .and reply in a way that [Your Name] is himself talking .reply in short sentences`,
-                  },
-                ],
-              },
-            ],
-          }),
-        },
-      )
+      console.log("Calling Gemini API with message:", inputText.substring(0, 50) + "...")
+      console.log("API Key configured:", apiKey ? "Yes" : "No")
+
+      // Use gemini-2.5-flash model which is the latest stable model available
+      const modelName = "gemini-2.5-flash"
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`
+      
+      console.log(`Calling API with model: ${modelName}`)
+
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: `You are Sayan's AI assistant. About Sayan: ${myDescription}
+
+User question: ${inputText}
+
+Answer the user's question based on Sayan's profile. Be friendly and concise.`,
+                },
+              ],
+            },
+          ],
+        }),
+      })
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
-        console.error("API Error:", response.status, errorData)
+        console.error("API Error Details:", { status: response.status, statusText: response.statusText, data: errorData })
+
+        // Handle specific error codes
+        if (response.status === 404) {
+          throw new Error("API Error: 404 - Model not found. Try a different API key from https://makersuite.google.com/app/apikey")
+        } else if (response.status === 429) {
+          throw new Error("API Error: 429 Rate Limit - Your quota is exceeded. Try again later or check your billing settings.")
+        } else if (response.status === 401 || response.status === 403) {
+          throw new Error("API Error: 401/403 - Invalid API key. Please verify your .env.local has the correct key.")
+        } else if (response.status === 400) {
+          throw new Error("API Error: 400 - Bad request. " + JSON.stringify(errorData))
+        }
         throw new Error(`API Error: ${response.status} ${response.statusText}`)
       }
 
       const data = await response.json()
+      
+      if (!data.candidates || data.candidates.length === 0) {
+        console.log("API Response:", data)
+        throw new Error("No response from API")
+      }
+      
       const aiResponse =
         data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "Sorry, I couldn't process that. Could you try asking something else?"
+        "I'm not sure how to answer that. Could you ask me something else about Sayan?"
 
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -116,14 +179,22 @@ export default function ChatbotOverlay({ isOpen, onClose }: ChatbotOverlayProps)
       let errorText = "Oops! Something went wrong. Please try again later. 😅"
       
       if (error instanceof Error) {
-        if (error.message.includes("API key not configured")) {
-          errorText = "⚠️ API key is not configured. Please check your environment variables."
-        } else if (error.message.includes("401")) {
-          errorText = "⚠️ Invalid API key. Please check your Gemini API key."
-        } else if (error.message.includes("429")) {
-          errorText = "⚠️ Rate limit exceeded. Please try again in a moment."
-        } else if (error.message.includes("Failed to fetch")) {
-          errorText = "⚠️ Network error. Please check your internet connection."
+        const errorMsg = error.message.toLowerCase()
+        if (errorMsg.includes("api key not configured")) {
+          errorText = "⚠️ API key is not configured. Please check .env.local"
+        } else if (errorMsg.includes("401")) {
+          errorText = "⚠️ Invalid API key. Please verify your Gemini API key."
+        } else if (errorMsg.includes("429")) {
+          errorText = "⚠️ Rate limit exceeded. Please wait 30 seconds and try again."
+        } else if (errorMsg.includes("403")) {
+          errorText = "⚠️ API access denied. Check your API key permissions."
+        } else if (errorMsg.includes("failed to fetch")) {
+          errorText = "⚠️ Network error. Check your internet connection."
+        } else if (errorMsg.includes("no response from api")) {
+          errorText = "⚠️ API returned no response. Please try again."
+        } else {
+          console.log("Unknown error details:", error.message)
+          errorText = `Error: ${error.message}`
         }
       }
 

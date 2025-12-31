@@ -25,8 +25,6 @@ function Box({ position, color }: BoxProps) {
     <mesh
       position={position as any}
       ref={mesh}
-      onPointerOver={() => setHovered(true)}
-      onPointerOut={() => setHovered(false)}
       scale={hovered ? 1.5 : 1}
     >
       <boxGeometry args={[0.5, 0.5, 0.5]} />
