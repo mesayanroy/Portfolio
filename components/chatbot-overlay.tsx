@@ -43,7 +43,7 @@ export default function ChatbotOverlay({ isOpen, onClose }: ChatbotOverlayProps)
   
   // API key from environment variables (set in .env.local)
   // Get your key from: https://makersuite.google.com/app/apikey
-  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY ?? ""
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -106,7 +106,15 @@ export default function ChatbotOverlay({ isOpen, onClose }: ChatbotOverlayProps)
 
     try {
       if (!apiKey) {
-        throw new Error("API key not configured")
+        const offlineMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          text: "⚠️ AI assistant is offline because the Gemini API key is not configured. Add NEXT_PUBLIC_GEMINI_API_KEY in your environment to enable responses.",
+          isUser: false,
+          timestamp: new Date(),
+        }
+        setMessages((prev) => [...prev, offlineMessage])
+        setIsLoading(false)
+        return
       }
 
       console.log("Calling Gemini API with message:", inputText.substring(0, 50) + "...")
