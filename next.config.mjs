@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable strict error checking for production
+  eslint: {
+    ignoreDuringBuilds: false,
+    dirs: ['app', 'components', 'lib', 'hooks'],
+  },
   typescript: {
     ignoreBuildErrors: false,
     tsconfigPath: './tsconfig.json',
