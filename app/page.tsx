@@ -95,8 +95,22 @@ export default function Home() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // You can add a console.log here if you want to verify it's working
-    console.log("Form submission prevented")
+    
+    // Get form data
+    const formData = new FormData(e.currentTarget)
+    const name = formData.get('name') as string
+    const email = formData.get('email') as string
+    const message = formData.get('message') as string
+
+    // Create mailto link with pre-filled data
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`)
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    )
+    const mailtoLink = `mailto:rsayan570@gmail.com?subject=${subject}&body=${body}`
+
+    // Open email client
+    window.location.href = mailtoLink
   }
 
   return (
@@ -627,6 +641,7 @@ export default function Home() {
                         id="name"
                         name="name"
                         placeholder="Your name"
+                        required
                         className="w-full px-3 py-2 bg-gray-800/40 border border-gray-700/40 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-red-500/60 focus:ring-1 focus:ring-red-500/30 focus:bg-gray-800/60 transition-all duration-300 hover:border-gray-700/60"
                       />
                     </motion.div>
@@ -646,6 +661,7 @@ export default function Home() {
                         id="email"
                         name="email"
                         placeholder="your@email.com"
+                        required
                         className="w-full px-3 py-2 bg-gray-800/40 border border-gray-700/40 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-red-500/60 focus:ring-1 focus:ring-red-500/30 focus:bg-gray-800/60 transition-all duration-300 hover:border-gray-700/60"
                       />
                     </motion.div>
@@ -666,6 +682,7 @@ export default function Home() {
                       name="message"
                       rows={3}
                       placeholder="Tell me about your project..."
+                      required
                       className="w-full px-3 py-2 bg-gray-800/40 border border-gray-700/40 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-red-500/60 focus:ring-1 focus:ring-red-500/30 focus:bg-gray-800/60 transition-all duration-300 hover:border-gray-700/60 resize-none"
                     ></textarea>
                   </motion.div>
@@ -734,7 +751,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="flex justify-center gap-1"
             >
-              <a href="https://twitter.com/im_sayan08" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-red-400 text-xs transition-colors">Twitter</a>
+              <a href="https://x.com/mesayanroy" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-red-400 text-xs transition-colors">Twitter</a>
               <span className="text-gray-600">•</span>
               <a href="https://linkedin.com/in/sayan-roy-111278321" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-red-400 text-xs transition-colors">LinkedIn</a>
               <span className="text-gray-600">•</span>
@@ -750,7 +767,7 @@ export default function Home() {
           <div className="flex flex-wrap justify-center gap-6 mb-8">
             <SocialIcon icon={<Github />} href="https://github.com/mesayanroy" label="GitHub" />
             <SocialIcon icon={<Linkedin />} href="https://linkedin.com/in/sayan-roy-111278321" label="LinkedIn" />
-            <SocialIcon icon={<Twitter />} href="https://twitter.com/im_sayan08" label="Twitter" />
+            <SocialIcon icon={<Twitter />} href="https://x.com/mesayanroy" label="Twitter" />
             <SocialIcon icon={<MessageSquare />} href="https://discord.com/users/mesayanroy" label="Discord" />
             <SocialIcon icon={<PenTool />} href="https://medium.com/@rsayan570" label="Medium" />
             <SocialIcon
