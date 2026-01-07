@@ -65,6 +65,9 @@
     --ring: 240 4.9% 83.9%;
     --radius: 0.75rem;
   }
+  .theme {
+    --animate-blink-cursor: blink-cursor 1.2s step-end infinite;
+  }
 }
 
 @layer base {
@@ -154,4 +157,15 @@
   text-shadow: -2px 0 #ec4899;
   clip: rect(85px, 550px, 140px, 0);
   animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+@theme inline {
+  @keyframes blink-cursor {
+  0%, 49% {
+    opacity: 1;
+    }
+  50%, 100% {
+    opacity: 0;
+    }
+  }
 }

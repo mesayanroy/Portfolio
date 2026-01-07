@@ -32,6 +32,7 @@ import AnimatedBoxes from "@/components/AnimatedBoxes"
 import ChatBubble from "@/components/chat-bubble"
 import ChatbotOverlay from "@/components/chatbot-overlay"
 import LiveClock from "@/components/live-clock"
+import { TypingAnimation } from "@/components/ui/typing-animation"
 
 const hackathonData = [
   {
@@ -199,30 +200,21 @@ export default function Home() {
                     />
                   </motion.span>
                 </h1>
-                <h2
-                  className="text-lg md:text-xl text-gray-300 relative inline-block"
-                  style={{ fontFamily: '"__nextjs-Geist Mono"' }}
-                >
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 1 }}
-                  >
-                    Blockchain Innovator | Full-Stack Developer | Tech Explorer
-                  </motion.span>
-                  <motion.span
-                    className="inline-block w-0.5 h-5 md:h-6 bg-gradient-to-b from-red-500 to-yellow-500 ml-1 align-middle"
-                    animate={{
-                      opacity: [1, 0, 1],
-                    }}
-                    transition={{
-                      duration: 1.2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1.5,
-                    }}
+                <div className="relative inline-block">
+                  <TypingAnimation
+                    words={["Blockchain Innovator", "Full-Stack Developer", "Tech Explorer"]}
+                    className="text-lg md:text-xl text-white"
+                    typeSpeed={50}
+                    deleteSpeed={30}
+                    pauseDelay={1500}
+                    delay={0.8}
+                    loop={true}
+                    showCursor={true}
+                    blinkCursor={true}
+                    cursorStyle="line"
+                    style={{ fontFamily: '"__nextjs-Geist Mono"' }}
                   />
-                </h2>
+                </div>
                 
                 {/* Status Bar: Open to Work + IST Clock */}
                 <motion.div
@@ -277,65 +269,88 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Compact About Card */}
+            {/* Compact About Card - Magic UI Terminal */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="bg-gray-900/70 border border-gray-800/80 rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur"
+              className="w-full"
             >
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-full overflow-hidden border border-red-500/50">
-                  <Image
-                    src="https://i.ibb.co/S4K4HCsY/sayanprofilepic.jpg"
-                    alt="Sayan Roy"
-                    width={64}
-                    height={64}
-                    className="object-cover"
-                  />
+              <div
+                className="rounded-xl overflow-hidden shadow-2xl backdrop-blur-md border border-gray-800/70 bg-gradient-to-br from-[#0f0f0f] via-[#141414] to-[#101010]"
+              >
+                {/* Terminal Header */}
+                <div className="px-4 py-2.5 flex items-center justify-between border-b border-gray-800/80 bg-gradient-to-b from-gray-800/80 to-gray-900/80">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2.5 w-2.5 rounded-full bg-red-500/90 shadow-[0_0_6px_rgba(255,99,71,0.5)]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-amber-400/90 shadow-[0_0_6px_rgba(255,215,0,0.45)]" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/90 shadow-[0_0_6px_rgba(52,211,153,0.45)]" />
+                  </div>
+                  <span className="text-xs font-medium text-gray-300/80">sayan@portfolio ~</span>
+                  <div className="w-6" />
                 </div>
-                <div>
-                  <p className="text-sm text-gray-400">About Me</p>
-                  <h3
-                    className="text-2xl font-bold text-gray-300"
-                  >
-                    Sayan Roy
-                  </h3>
-                  <p className="text-sm text-gray-400">Kolkata, India</p>
+
+                {/* Terminal Body */}
+                <div className="p-4 md:p-5 font-mono text-xs md:text-sm space-y-3">
+                  {/* Profile row */}
+                  <div className="flex items-center gap-3 rounded-lg border border-gray-800/70 bg-black/40 px-3 py-2">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-700/70 bg-gray-900/70 flex-shrink-0">
+                      <Image
+                        src="https://i.ibb.co/S4K4HCsY/sayanprofilepic.jpg"
+                        alt="Sayan Roy"
+                        width={40}
+                        height={40}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                    <div className="leading-tight text-gray-200">
+                      <div><span className="text-amber-300">user</span>: Sayan Roy</div>
+                      <div className="text-[11px] text-gray-400"><span className="text-amber-300">location</span>: Kolkata, India</div>
+                    </div>
+                  </div>
+
+                  {/* Prompt */}
+                  <div className="flex items-start gap-2 text-gray-200">
+                    <span className="text-amber-300">➜</span>
+                    <span className="text-emerald-400">about_me --detail</span>
+                  </div>
+
+                  {/* Output */}
+                  <div className="space-y-2 text-[12px] md:text-[13px] text-sky-200 leading-relaxed ml-1">
+                    <div><span className="text-emerald-300">Blockchain Wizard</span> & Full Stack Alchemist</div>
+                    <div className="text-sky-300/90">Solidity • Go • Rust | DeFi • Open-source</div>
+                    <div className="text-sky-300/90">Building secure, decentralized systems</div>
+                  </div>
+
+                  {/* Cursor */}
+                  <div className="flex items-center gap-2 pt-1 text-amber-300">
+                    <span>➜</span>
+                    <motion.span
+                      animate={{ opacity: [1, 0] }}
+                      transition={{ duration: 0.7, repeat: Infinity }}
+                      className="text-emerald-400"
+                    >
+                      █
+                    </motion.span>
+                  </div>
                 </div>
-              </div>
 
-              <div className="space-y-3 text-gray-200 leading-relaxed text-sm md:text-base">
-                <p>
-                  A <strong style={{ color: "rgba(255, 0, 0, 1)" }}>Blockchain Wizard</strong> and
-                  <strong style={{ color: "rgba(255, 0, 0, 1)" }}> Full Stack Alchemist</strong>, crafting secure,
-                  scalable systems from smart contracts to full-stack apps.
-                </p>
-                <p>
-                  I thrive on <strong style={{ color: "rgba(255, 0, 0, 1)" }}>Solidity, Go, Rust</strong>, and dive
-                  deep into <strong style={{ color: "rgba(255, 0, 0, 1)" }}>DeFi rabbit holes</strong> and
-                  <strong style={{ color: "rgba(255, 0, 0, 1)" }}> open-source chaos</strong>.
-                </p>
-                <p>
-                  Let's <strong style={{ color: "rgba(255, 0, 0, 1)" }}>connect, build, and break things</strong>—the
-                  future is decentralized, and I'm here for it.
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-3 mt-6">
-                <ScrollLink to="services" smooth duration={500}>
-                  <Button
-                    variant="secondary"
-                    className="bg-gray-800 text-white border border-gray-700 hover:border-red-500"
-                  >
-                    View Expertise
-                  </Button>
-                </ScrollLink>
-                <ScrollLink to="work" smooth duration={500}>
-                  <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white">
-                    See Projects
-                  </Button>
-                </ScrollLink>
+                {/* Action buttons */}
+                <div className="px-4 pb-4 pt-2 flex flex-wrap gap-2.5 border-t border-gray-800/70 bg-black/40">
+                  <ScrollLink to="services" smooth duration={500} className="flex-1 sm:flex-none">
+                    <Button
+                      variant="secondary"
+                      className="w-full sm:w-auto bg-gray-900 text-white border border-gray-700 hover:border-red-500 text-xs md:text-sm"
+                    >
+                      Expertise
+                    </Button>
+                  </ScrollLink>
+                  <ScrollLink to="work" smooth duration={500} className="flex-1 sm:flex-none">
+                    <Button className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-amber-500 hover:from-red-500 hover:to-amber-400 text-white text-xs md:text-sm">
+                      Projects
+                    </Button>
+                  </ScrollLink>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -604,7 +619,7 @@ export default function Home() {
             <div className="text-center space-y-2">
               <h2 className="text-3xl sm:text-4xl font-bold">
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-pink-500 to-yellow-500">
-                  Ping Me
+                  Get in Touch
                 </span>
               </h2>
               <p className="text-gray-400 text-xs sm:text-sm">Let's work on something amazing</p>
