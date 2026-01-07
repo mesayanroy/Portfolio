@@ -8,7 +8,6 @@ const languages = [
   { lang: "こんにちは", color: "rgba(236, 72, 153, 1)" }, // Japanese - Pink
   { lang: "नमस्ते", color: "rgba(249, 228, 6, 1)" }, // Hindi - Gold
   { lang: "你好", color: "rgba(237, 7, 7, 1)" }, // Mandarin - Red
-  { lang: "Bonjour", color: "rgba(5, 250, 168, 1)" }, // French - Pink
 ]
 
 export default function Loading() {

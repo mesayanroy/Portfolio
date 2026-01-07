@@ -77,10 +77,106 @@ const hackathonData = [
   },
 ]
 
+type Project = {
+  title: string
+  description: string
+  tags: string[]
+  image: string
+  liveUrl?: string
+  demoUrl?: string
+}
+
+const projects: Project[] = [
+  {
+    title: "Aptos Swap",
+    description:
+      "A trusted and protected De-Fi payment gateway for secure payments with minimum gas fees via meta transaction Cross-chain and Efficient Crypto payments.",
+    tags: ["Next.js", "Cross-Chain", "Move", "Solidity", "Typescript", "DeFi"],
+    image: "/projects/aptos-swap.png",
+    liveUrl: "https://github.com/mesayanroy/AptosSwap",
+    demoUrl: "https://example.com/aptos-swap-demo",
+  },
+  {
+    title: "Surge",
+    description:
+      "A secure Game-Fi staking protocol on EVM where players stake tokens and duel, with protected stacking, easy cashout, and a secure bridge for asset transfers.",
+    tags: ["On-chain", "Interoperability", "Game-Fi"],
+    image: "/projects/surge.png",
+    liveUrl: "https://github.com/mesayanroy/Surge",
+    demoUrl: "https://example.com/surge-demo",
+  },
+  {
+    title: "LOLand",
+    description:
+      "Decentralized social meme platform with CMS, DeFi NFTs, and secure minting of tokens in meme form.",
+    tags: ["Hardhat", "Typescript", "Nextjs", "Superbase", "Solidity", "NFT"],
+    image: "/projects/loland.png",
+    liveUrl: "https://github.com/mesayanroy/LOLand",
+    demoUrl: "https://example.com/loland-demo",
+  },
+  {
+    title: "Opus",
+    description:
+      "Create AI trading agents for swaps, DEX/CEX, sell/buy, liquidations, with real-time analysis, multi-chain wallet support, and copy trading.",
+    tags: ["Typescript", "REST API", "LangChain", "Next.js", "LangGraph", "Onchain", "AI", "Crypto-Trade"],
+    image: "/projects/opus.png",
+    liveUrl: "https://opus-cryptotrade.vercel.app/",
+    demoUrl: "https://example.com/opus-demo",
+  },
+  {
+    title: "SR Games",
+    description:
+      "Fast-paced shooter on dynamic urban map; navigate rooftops, alleys, and abandoned buildings to control zones and survive.",
+    tags: ["JavaScript", "REST API", "Firebase", "GunJS"],
+    image: "/projects/sr-games.png",
+    liveUrl: "https://sr-games.vercel.app/",
+    demoUrl: "https://example.com/sr-games-demo",
+  },
+  {
+    title: "Zinko Protocol",
+    description:
+      "ZK lending protocol offering private, permissionless access to global liquidity with zero-knowledge proofs for confidential DeFi.",
+    tags: ["zk proofs", "zk snarks", "zk circuits", "Solidity", "Typescript", "DeFi"],
+    image: "/projects/zinko.png",
+    liveUrl: "https://github.com/mesayanroy/dashboard-zinko",
+    demoUrl: "https://example.com/zinko-demo",
+  },
+]
+
+type Contribution = {
+  title: string
+  description: string
+  tags: string[]
+  link: string
+}
+
+const contributions: Contribution[] = [
+  {
+    title: "Open Source & GSSOC",
+    description: "Senior contributor in GSSOC; shipped fixes and features across multiple repos.",
+    tags: ["GSSOC", "Open Source", "PRs"],
+    link: "https://github.com/mesayanroy",
+  },
+  {
+    title: "Blockchain Audits",
+    description: "Security reviews and audit reports for EVM smart contracts and DeFi protocols.",
+    tags: ["Security", "EVM", "Audits"],
+    link: "https://github.com/mesayanroy",
+  },
+  {
+    title: "Hackathon Builds",
+    description: "Multiple prize-winning hackathon builds across DeFi, bridges, and social Web3.",
+    tags: ["Hackathons", "DeFi", "Bridges"],
+    link: "https://github.com/mesayanroy",
+  },
+]
+
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [loading, setLoading] = useState(true)
   const [chatbotOpen, setChatbotOpen] = useState(false)
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0)
+  const [activeWorkTab, setActiveWorkTab] = useState<"projects" | "contributions">("projects")
 
   useEffect(() => {
     setMounted(true)
@@ -113,6 +209,12 @@ export default function Home() {
     // Open email client
     window.location.href = mailtoLink
   }
+
+  const totalProjects = projects.length
+  const handlePrevProject = () =>
+    setActiveProjectIndex((idx) => (idx - 1 + totalProjects) % totalProjects)
+  const handleNextProject = () =>
+    setActiveProjectIndex((idx) => (idx + 1) % totalProjects)
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
@@ -449,150 +551,250 @@ export default function Home() {
                     color: "transparent"
                 }}
               >
-                What I've Built
+                Proof of work
               </span>
               <span className="ml-2 text-white">🏗️</span>
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-              <ProjectCard
-                title="Aptos Swap"
-                description="A trusted and protected De-Fi payment gateway for secure payments with minimum gas fees via meta transaction Cross-chain and Efficient Crypto payments."
-                tags={["Next.js", "Cross-Chain " ,"Move", "Solidity", "Typescript", "DeFi"]}
-                image="/projects/aptos-swap.png"
-                liveUrl="https://github.com/mesayanroy/AptosSwap"
-                demoUrl="https://example.com/aptos-swap-demo"
-              />
-              <ProjectCard
-                title="Surge"
-                description=" A secure Game-Fi  Staking protocol made Onchain on EVM, where players can Stake their token asset and win the duals online. Its trusted and a complete mutiplayer gaming platform with proctected Stacking.
-                 & easy cashout , secure bridge for asset transfers between different chains and personal accounts."
-                tags={["On-chain", "Interoperability", "Game-Fi"]}
-                image="/projects/surge.png"
-                liveUrl="https://github.com/mesayanroy/Surge"
-                demoUrl="https://example.com/surge-demo"
-              />
-              <ProjectCard
-                title="LOLand"
-                description="Decentralized Social Media Meme Platform using blockchain technology . Therefore a personal Meme platform with a custom content management system for easy posting with DeFi NFTs and secure minting of tokens in a form of Meme's."
-                tags={["Hardhat", "Typescript", "Nextjs", "Superbase", "Solidity", "NFT"]}
-                image="/projects/loland.png"
-                liveUrl="https://github.com/mesayanroy/LOLand"
-                demoUrl="https://example.com/loland-demo"
-              />
-              <ProjectCard
-                title="Opus"
-                description="Create your own AI trading Agents that will do the trade and maintain your trading portfolio , ask them them to do swaps, DEX , CEX , Sell, Buy or liquidate assests on your will with easy cash in and cash out. Featuring real-time market analysis, automated trading insights, multi-chain wallet support, and copy trading capabilities.."
-                tags={["Typescript", "RESTfull API", "langchain", "Nextjs", "lang-graph" , "Onchain" , "AI" , "Crypto-Trade" ]}
-                image="/projects/opus.png"
-                liveUrl="https://opus-cryptotrade.vercel.app/"
-                demoUrl="https://example.com/opus-demo"
-              />
-              <ProjectCard
-                title="SR Games"
-                description="A fast-paced shooting game set on a dynamic urban map where players navigate rooftops, alleys, and abandoned buildings to eliminate enemies and control key zones. Strategic positioning and map awareness are crucial to survival."
-                tags={["Javascript", "RESTfull API", "Firebase", "GunJS", ]}
-                image="/projects/sr-games.png"
-                liveUrl="https://sr-games.vercel.app/"
-                demoUrl="https://example.com/sr-games-demo"
-              />
-               <ProjectCard
-                title="Zinko Protocol"
-                description="A trusted and protected ZK lending protocol offering private, permissionless access to global liquidity. Users can borrow and lend assets anonymously using zero-knowledge proofs, ensuring privacy without sacrificing security or transparency.
-                With Zinko, experience seamless DeFi interactions while keeping your financial activities confidential."
-                tags={["zk proofs", " zk snarks " ,"zk circuits", "Solidity", "Typescript", "DeFi"]}
-                image="/projects/zinko.png"
-                liveUrl="https://github.com/mesayanroy/dashboard-zinko"
-                demoUrl="https://example.com/zinko-demo"
-              />
+            <div className="space-y-6">
+              {/* Mobile: single card carousel with nav buttons */}
+              <div className="md:hidden">
+                <ProjectCard
+                  project={projects[activeProjectIndex]}
+                  showNav
+                  onPrev={handlePrevProject}
+                  onNext={handleNextProject}
+                />
+              </div>
+
+              {/* Desktop/Tablet: terminal switcher + grid */}
+              <div className="hidden md:grid grid-cols-[minmax(320px,360px)_1fr] gap-8 items-start">
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="rounded-xl border border-gray-800/80 bg-gradient-to-br from-gray-900 via-black to-gray-900 shadow-[0_20px_70px_rgba(0,0,0,0.5)] overflow-hidden sticky top-24"
+                >
+                  <div className="px-5 py-3.5 border-b border-gray-800/90 flex items-center justify-between bg-gradient-to-r from-red-600/40 via-pink-600/30 to-amber-500/30 backdrop-blur-sm">
+                    <div className="flex items-center gap-2.5 text-sm text-gray-100 font-semibold font-mono">
+                      <span className="h-3 w-3 rounded-full bg-red-500 shadow-[0_0_10px_rgba(255,99,71,0.8)] animate-pulse" />
+                      <span className="h-3 w-3 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(255,215,0,0.8)]" />
+                      <span className="h-3 w-3 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
+                      <span className="ml-2 text-base">workstation.sh</span>
+                    </div>
+                    <span className="text-xs text-gray-300 font-mono">~/workspace</span>
+                  </div>
+                  <div className="p-5 space-y-5 text-sm text-gray-200 font-mono">
+                    <motion.div 
+                      className="flex gap-2.5"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setActiveWorkTab("projects")}
+                        className={`flex-1 px-4 py-2.5 rounded-lg border text-sm font-bold transition-all duration-300 ${
+                          activeWorkTab === "projects"
+                            ? "border-red-500/80 bg-gradient-to-r from-red-500/25 to-pink-500/20 text-white shadow-lg shadow-red-500/20"
+                            : "border-gray-700/60 bg-gray-800/50 text-gray-300 hover:border-red-500/50 hover:bg-gray-800/70"
+                        }`}
+                      >
+                        📂 Projects
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveWorkTab("contributions")}
+                        className={`flex-1 px-4 py-2.5 rounded-lg border text-sm font-bold transition-all duration-300 ${
+                          activeWorkTab === "contributions"
+                            ? "border-amber-400/80 bg-gradient-to-r from-amber-500/25 to-yellow-500/20 text-white shadow-lg shadow-amber-500/20"
+                            : "border-gray-700/60 bg-gray-800/50 text-gray-300 hover:border-amber-400/50 hover:bg-gray-800/70"
+                        }`}
+                      >
+                         Contributions
+                      </button>
+                    </motion.div>
+                    <motion.div 
+                      className="bg-black/60 border border-gray-800/70 rounded-xl p-4 space-y-3 shadow-inner"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="text-emerald-400 text-sm">➜</span>
+                        <span className="text-sky-400 text-sm">ls</span>
+                        <span className="text-gray-300 text-sm">./work</span>
+                      </div>
+                      <div className="text-amber-300 text-sm pl-4">{activeWorkTab === "projects" ? "📁 projects/" : "📁 contributions/"}</div>
+                      
+                      <div className="border-t border-gray-800/50 pt-3">
+                        <div className="flex items-center gap-2">
+                          <span className="text-emerald-400 text-sm">➜</span>
+                          <span className="text-sky-400 text-sm">cat</span>
+                          <span className="text-gray-300 text-sm">README.md</span>
+                        </div>
+                        <div className="text-gray-400 text-sm mt-2 pl-4 leading-relaxed border-l-2 border-red-500/30 ml-2">
+                          {activeWorkTab === "projects"
+                            ? " Curated builds showcasing Web3, AI, and full-stack expertise. Each project demonstrates production-ready code and innovative solutions."
+                            : " Active open-source contributions, security audits, and hackathon projects. Committed to building in public and shipping quality code."}
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-2 pt-2">
+                        <span className="text-emerald-400 text-sm">➜</span>
+                        <motion.span
+                          animate={{ opacity: [1, 0] }}
+                          transition={{ duration: 0.8, repeat: Infinity }}
+                          className="text-gray-400 text-sm"
+                        >
+                          █
+                        </motion.span>
+                      </div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6">
+                  {activeWorkTab === "projects"
+                    ? projects.map((project) => <ProjectCard key={project.title} project={project} />)
+                    : contributions.map((item) => (
+                        <div
+                          key={item.title}
+                          className="rounded-xl border border-gray-800 bg-gray-900/70 p-4 flex flex-col gap-2 shadow-[0_10px_30px_rgba(0,0,0,0.35)] hover:border-amber-400/60 transition-colors"
+                        >
+                          <div className="text-sm font-bold text-white">{item.title}</div>
+                          <p className="text-xs text-gray-300 leading-relaxed flex-1">{item.description}</p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {item.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="text-[11px] px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-500/15 to-red-500/15 text-amber-200 border border-amber-400/30"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <a
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-xs text-amber-300 hover:text-amber-200 transition-colors"
+                          >
+                            View work ↗
+                          </a>
+                        </div>
+                      ))}
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Hackathons Section */}
-      <section id="hackathons" className="py-16 lg:py-20 bg-black">
-        <div className="container px-4 mx-auto max-w-6xl">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">
+      <section id="hackathons" className="py-14 lg:py-16 bg-black relative overflow-hidden">
+        {/* Subtle animated background glows (compact) */}
+        <motion.div
+          className="pointer-events-none absolute top-24 left-20 w-72 h-72 bg-red-500/5 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.25, 0.4, 0.25] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="pointer-events-none absolute bottom-24 right-20 w-72 h-72 bg-yellow-500/5 rounded-full blur-3xl"
+          animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.25, 0.4] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+        />
+
+        <div className="container px-4 mx-auto max-w-5xl relative z-10">
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 0.6 }} viewport={{ once: true }}>
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold mb-8 text-center"
+              initial={{ opacity: 0, y: -12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
               <span
-                className="bg-clip-text text-transparent"
+                className="inline-block bg-clip-text text-transparent"
                 style={{
-                  backgroundImage: "linear-gradient(0deg, rgba(237, 7, 7, 1) 27%, rgba(249, 228, 6, 1) 64%)",
+                  backgroundImage: "linear-gradient(90deg, rgba(240, 24, 0, 1) 0%, rgba(249, 217, 11, 1) 100%)",
                   WebkitBackgroundClip: "text",
-                  color: "transparent",
                 }}
               >
-                Hackathons 
+                Hackathons
               </span>
               <span className="ml-2 text-white">🏆</span>
-            </h2>
+            </motion.h2>
 
             <div className="relative pl-4 md:pl-8">
-              {/* Vertical Timeline Bar (Left Side) */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-1 md:w-1.5 hidden sm:block"
-                style={{
-                  backgroundImage: "linear-gradient(180deg, rgba(237, 7, 7, 0.9) 0%, rgba(249, 228, 6, 0.8) 100%)",
-                }}
-              ></div>
+              {/* Compact vertical timeline */}
+              <motion.div
+                className="absolute left-0 top-0 bottom-0 w-[3px] md:w-1 hidden sm:block rounded-full"
+                style={{ backgroundImage: "linear-gradient(180deg, rgba(237,7,7,0.9) 0%, rgba(249,228,6,0.8) 100%)" }}
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                viewport={{ once: true }}
+              />
 
-              {/* Timeline Items */}
-              <div className="space-y-6">
+              {/* Items */}
+              <div className="space-y-5">
                 {hackathonData.map((hackathon, index) => (
                   <motion.div
                     key={hackathon.id}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -18 }}
                     whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.08 }}
+                    transition={{ duration: 0.45, delay: index * 0.08 }}
                     viewport={{ once: true }}
-                    className="relative"
+                    whileHover={{ scale: 1.015, x: 3 }}
+                    className="relative group"
                   >
-                    {/* Dot Connector (hidden on mobile) */}
-                    <div
-                      className="absolute -left-3.5 top-4 w-3 h-3 rounded-full hidden sm:block"
+                    {/* Timeline dot */}
+                    <motion.div
+                      className="absolute -left-3 top-4 w-2.5 h-2.5 rounded-full hidden sm:block"
                       style={{
-                        backgroundImage: "linear-gradient(135deg, rgba(237, 7, 7, 1) 0%, rgba(249, 228, 6, 1) 100%)",
-                        boxShadow: "0 0 10px rgba(237,7,7,0.4)",
+                        backgroundImage: "linear-gradient(135deg, rgba(237,7,7,1) 0%, rgba(249,228,6,1) 100%)",
+                        boxShadow: "0 0 10px rgba(237,7,7,0.5)",
                       }}
-                    ></div>
+                      initial={{ scale: 0 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ duration: 0.3, delay: index * 0.08 + 0.1 }}
+                      viewport={{ once: true }}
+                    />
 
-                    {/* Card */}
-                    <div
-                      className="p-4 md:p-5 bg-gray-900/70 rounded-lg backdrop-blur-sm border border-gray-800 hover:border-red-500/60 transition-all duration-300"
-                      style={{
-                        borderColor: "rgba(255, 0, 0, 0.3)",
-                        backgroundColor: "rgba(18, 18, 18, 0.6)",
-                      }}
+                    {/* Compact card */}
+                    <motion.div
+                      className="p-4 md:p-5 bg-gradient-to-br from-gray-900/80 via-black/60 to-gray-900/80 rounded-lg border border-gray-800/50 relative overflow-hidden shadow-[0_6px_20px_rgba(0,0,0,0.35)]"
+                      whileHover={{ boxShadow: "0 12px 35px rgba(237,7,7,0.12)" }}
+                      transition={{ duration: 0.25 }}
                     >
-                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
-                        <div className="flex-1">
-                          <h3 className="text-lg md:text-xl font-bold text-white">{hackathon.name}</h3>
-                          <p
-                            className="text-sm md:text-base text-gray-300 mb-2"
-                            style={{ color: "rgba(209, 35, 114, 1)" }}
-                          >
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2.5">
+                        <div className="flex-1 space-y-2">
+                          <h3 className="text-base md:text-lg font-bold text-white">{hackathon.name}</h3>
+                          <p className="text-xs md:text-sm font-semibold bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">
                             {hackathon.achievement}
                           </p>
-                          <p className="text-xs md:text-sm text-gray-400 mb-2">{hackathon.date}</p>
-                          <p className="text-xs md:text-sm text-gray-300 leading-relaxed mb-3">{hackathon.description}</p>
-                          <div className="flex flex-wrap gap-1.5">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-3.5 h-3.5 text-gray-500" />
+                            <p className="text-xs text-gray-400">{hackathon.date}</p>
+                          </div>
+                          <p className="text-xs text-gray-300 leading-relaxed">{hackathon.description}</p>
+                          <div className="flex flex-wrap gap-1.5 pt-1">
                             {hackathon.tech.map((tech, techIndex) => (
-                              <span
+                              <motion.span
                                 key={techIndex}
-                                className="text-[10px] md:text-xs px-2 py-0.5 rounded-full bg-gradient-to-r from-purple-500/15 to-pink-500/15 text-purple-200 border border-purple-500/20"
+                                className="text-[10px] md:text-[11px] px-2 py-0.5 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-200 border border-purple-500/30"
+                                whileHover={{ scale: 1.05, y: -1 }}
                               >
                                 {tech}
-                              </span>
+                              </motion.span>
                             ))}
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </motion.div>
                 ))}
               </div>
@@ -607,7 +809,7 @@ export default function Home() {
         <div className="absolute top-20 left-10 w-64 h-64 bg-red-500/3 rounded-full blur-3xl -translate-x-1/2"></div>
         <div className="absolute bottom-10 right-10 w-64 h-64 bg-yellow-500/3 rounded-full blur-3xl translate-x-1/2"></div>
 
-        <div className="container px-4 mx-auto max-w-4xl relative z-10">
+        <div className="container px-4 mx-auto max-w-6xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -625,19 +827,111 @@ export default function Home() {
               <p className="text-gray-400 text-xs sm:text-sm">Let's work on something amazing</p>
             </div>
 
-            {/* Contact Card - Compact */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="relative group"
-            >
-              {/* Gradient Border Glow */}
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-red-500 via-pink-500 to-yellow-500 rounded-xl blur opacity-15 group-hover:opacity-35 transition duration-500"></div>
+            {/* Two Column Layout: Contact Terminal + Form */}
+            <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-6 items-start">
+              {/* Contact Terminal - Left Side */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="rounded-xl border border-gray-800/80 bg-gradient-to-br from-gray-900 via-black to-gray-900 shadow-[0_20px_70px_rgba(0,0,0,0.5)] overflow-hidden lg:sticky lg:top-24"
+              >
+                <div className="px-5 py-3.5 border-b border-gray-800/90 flex items-center justify-between bg-gradient-to-r from-red-600/40 via-pink-600/30 to-yellow-500/30 backdrop-blur-sm">
+                  <div className="flex items-center gap-2.5 text-sm text-gray-100 font-semibold font-mono">
+                    <span className="h-3 w-3 rounded-full bg-red-500 shadow-[0_0_10px_rgba(255,99,71,0.8)] animate-pulse" />
+                    <span className="h-3 w-3 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(255,215,0,0.8)]" />
+                    <span className="h-3 w-3 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(52,211,153,0.8)]" />
+                    <span className="ml-2 text-base">contact.sh</span>
+                  </div>
+                  <span className="text-xs text-gray-300 font-mono">~/reach-me</span>
+                </div>
+                <div className="p-5 space-y-4 text-sm font-mono">
+                  <motion.div 
+                    className="bg-black/60 border border-gray-800/70 rounded-xl p-4 space-y-3 shadow-inner"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-emerald-400">➜</span>
+                      <span className="text-sky-400">cat</span>
+                      <span className="text-gray-300">contact_info.json</span>
+                    </div>
+                    <div className="pl-4 space-y-2.5 text-xs">
+                      <div className="flex flex-col gap-1">
+                        <span className="text-pink-400">"email":</span>
+                        <a href="mailto:rsayan570@gmail.com" className="text-sky-300 hover:text-sky-200 transition-colors pl-2 flex items-center gap-1">
+                          <span>📧</span>
+                          <span>rsayan570@gmail.com</span>
+                        </a>
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <span className="text-pink-400">"location":</span>
+                        <span className="text-gray-300 pl-2">📍 Kolkata, India</span>
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <span className="text-pink-400">"availability":</span>
+                        <span className="text-emerald-400 pl-2">✅ Open to Work</span>
+                      </div>
+                    </div>
+                  </motion.div>
 
-              {/* Card Content */}
-              <div className="relative bg-gradient-to-br from-gray-900/90 to-black/95 backdrop-blur-sm p-6 sm:p-7 md:p-8 rounded-xl border border-gray-800/40 group-hover:border-gray-700/60 transition-all duration-500">
+                  <motion.div 
+                    className="bg-black/60 border border-gray-800/70 rounded-xl p-4 space-y-3 shadow-inner"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span className="text-emerald-400">➜</span>
+                      <span className="text-sky-400">ls</span>
+                      <span className="text-gray-300">./socials</span>
+                    </div>
+                    <div className="pl-4 space-y-2 text-xs">
+                      <a href="https://github.com/mesayanroy" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+                        <Github className="w-4 h-4" />
+                        <span className="text-amber-300">github</span>
+                      </a>
+                      <a href="https://linkedin.com/in/sayan-roy-111278321" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+                        <Linkedin className="w-4 h-4" />
+                        <span className="text-amber-300">linkedin</span>
+                      </a>
+                      <a href="https://x.com/mesayanroy" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors">
+                        <Twitter className="w-4 h-4" />
+                        <span className="text-amber-300">twitter</span>
+                      </a>
+                    </div>
+                  </motion.div>
+
+                  <div className="flex items-center gap-2 pt-2">
+                    <span className="text-emerald-400">➜</span>
+                    <motion.span
+                      animate={{ opacity: [1, 0] }}
+                      transition={{ duration: 0.8, repeat: Infinity }}
+                      className="text-gray-400"
+                    >
+                      █
+                    </motion.span>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Contact Card - Right Side */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="relative group"
+              >
+                {/* Gradient Border Glow */}
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-red-500 via-pink-500 to-yellow-500 rounded-xl blur opacity-15 group-hover:opacity-35 transition duration-500"></div>
+
+                {/* Card Content */}
+                <div className="relative bg-gradient-to-br from-gray-900/90 to-black/95 backdrop-blur-sm p-6 sm:p-7 md:p-8 rounded-xl border border-gray-800/40 group-hover:border-gray-700/60 transition-all duration-500">
                 <form className="space-y-3.5" onSubmit={handleSubmit}>
                   {/* Name & Email Row (Mobile: stacked, Desktop: row) */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -714,7 +1008,7 @@ export default function Home() {
                       type="submit"
                       className="w-full py-2.5 px-4 bg-gradient-to-r from-red-500 via-pink-500 to-yellow-500 hover:from-red-600 hover:via-pink-600 hover:to-yellow-600 text-white text-sm font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-red-500/20 active:scale-95"
                     >
-                      Send Message ✨
+                      Send Message 
                     </Button>
                   </motion.div>
                 </form>
@@ -757,21 +1051,7 @@ export default function Home() {
                 </div>
               </div>
             </motion.div>
-
-            {/* Social Links - Compact Footer */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              viewport={{ once: true }}
-              className="flex justify-center gap-1"
-            >
-              <a href="https://x.com/mesayanroy" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-red-400 text-xs transition-colors">Twitter</a>
-              <span className="text-gray-600">•</span>
-              <a href="https://linkedin.com/in/sayan-roy-111278321" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-red-400 text-xs transition-colors">LinkedIn</a>
-              <span className="text-gray-600">•</span>
-              <a href="https://github.com/mesayanroy" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-red-400 text-xs transition-colors">GitHub</a>
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -823,7 +1103,18 @@ function ServiceCard({ icon, title, description }: { icon: React.ReactNode; titl
   )
 }
 
-function ProjectCard({ title, description, tags, image, liveUrl, demoUrl }: { title: string; description: string; tags: string[]; image: string; liveUrl: string; demoUrl: string }) {
+function ProjectCard({
+  project,
+  showNav = false,
+  onPrev,
+  onNext,
+}: {
+  project: Project
+  showNav?: boolean
+  onPrev?: () => void
+  onNext?: () => void
+}) {
+  const { title, description, tags, image, liveUrl, demoUrl } = project
   const liveDisabled = !liveUrl
   const demoDisabled = !demoUrl
   return (
@@ -866,7 +1157,7 @@ function ProjectCard({ title, description, tags, image, liveUrl, demoUrl }: { ti
             </span>
           ))}
         </div>
-        <div className="mt-auto flex flex-wrap gap-2 justify-center md:justify-start">
+        <div className={`mt-auto flex flex-wrap gap-2 ${showNav ? "justify-center" : "justify-center md:justify-start"}`}>
           <a
             href={liveUrl || "#"}
             target="_blank"
@@ -876,7 +1167,7 @@ function ProjectCard({ title, description, tags, image, liveUrl, demoUrl }: { ti
                 ? "bg-gray-800 text-gray-400 cursor-not-allowed border border-gray-700"
                 : "bg-gradient-to-r from-red-600 to-amber-400 hover:from-red-500 hover:to-amber-300 hover:-translate-y-0.5"
             }`}
-            aria-disabled={liveDisabled}
+            aria-disabled={liveDisabled ? true : undefined}
           >
             <ExternalLink className="w-4 h-4" /> {liveDisabled ? "Live soon" : "Live"}
           </a>
@@ -889,10 +1180,28 @@ function ProjectCard({ title, description, tags, image, liveUrl, demoUrl }: { ti
                 ? "bg-gray-800 text-gray-400 cursor-not-allowed border border-gray-700"
                 : "border border-red-500/60 hover:border-amber-300/80 hover:-translate-y-0.5"
             }`}
-            aria-disabled={demoDisabled}
+            aria-disabled={demoDisabled ? true : undefined}
           >
             <Play className="w-4 h-4" /> {demoDisabled ? "Demo soon" : "Demo"}
           </a>
+          {showNav && (
+            <>
+              <button
+                onClick={onPrev}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-white border border-gray-700 hover:border-red-500 transition-colors"
+                type="button"
+              >
+                ← Prev
+              </button>
+              <button
+                onClick={onNext}
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-xs font-medium text-white border border-gray-700 hover:border-amber-400 transition-colors"
+                type="button"
+              >
+                Next →
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>
