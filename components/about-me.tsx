@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { Calendar, MapPin, Building2 } from "lucide-react"
@@ -92,6 +93,16 @@ const timelineData = [
     location: "Hybrid",
     type: "Full - Time",
     logo: createLogoDataUri("SN"),
+    skills: ["Typescript", "Nextjs", "express.js" , "MongoDB"],
+  },
+   {
+    id: 1,
+    company: "Stellar",
+    role: "Ambassador & Developer",
+    period: "Jan 2026 - current",
+    location: "Remote",
+    type: "Full - Time",
+    logo: createLogoDataUri("SL"),
     skills: ["Typescript", "Nextjs", "express.js" , "MongoDB"],
   },
 ]
@@ -223,28 +234,42 @@ export default function AboutMe() {
               ></div>
 
               {/* Timeline Items */}
-              <div className="space-y-4 md:space-y-5">
-                {timelineData.map((item, index) => (
+              <div className="space-y-3 md:space-y-4">
+                {timelineData.map((item, index) => {
+                  const [isHovered, setIsHovered] = useState(false)
+                  return (
                   <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: index * 0.06 }}
-                    viewport={{ once: true }}
-                    className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-4 lg:gap-6 relative`}
+                    key={`${item.id}-${index}`}
+                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.08, type: "spring", stiffness: 100 }}
+                    viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+                    className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-3 lg:gap-4 relative group`}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
                   >
                     {/* Content */}
-                    <div 
-                      className="md:w-1/2 p-3 md:p-4 bg-gray-900/60 rounded-lg backdrop-blur-sm border border-gray-800"
+                    <motion.div 
+                      className="w-full md:w-1/2 p-2.5 sm:p-3 md:p-3 bg-gray-900/50 rounded-lg backdrop-blur-sm border border-gray-800 transition-all duration-300 cursor-pointer"
+                      whileHover={{ scale: 1.02, backgroundColor: "rgba(18, 18, 18, 0.8)" }}
                       style={{
                         color: "rgba(5, 5, 5, 1)",
-                        backgroundColor: "rgba(18, 18, 18, 0.5)",
-                        borderColor: "rgba(250, 0, 0, 1)",
-                        fontFamily: '"__nextjs-Geist Mono"'
+                        backgroundColor: isHovered ? "rgba(18, 18, 18, 0.8)" : "rgba(18, 18, 18, 0.5)",
+                        borderColor: isHovered ? "rgba(237, 7, 7, 1)" : "rgba(250, 0, 0, 1)",
+                        fontFamily: '"__nextjs-Geist Mono"',
+                        boxShadow: isHovered ? "0 0 20px rgba(237, 7, 7, 0.3)" : "none"
                       }}
                     >
-                      <div className="flex flex-col md:flex-row items-center gap-3" style={{ color: "rgba(0, 0, 0, 1)" }}>
-                        <div className="w-12 h-12 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden mb-2 md:mb-0 mx-auto md:mx-0">
+                      <motion.div 
+                        className="flex flex-col md:flex-row items-center gap-2 sm:gap-3" 
+                        style={{ color: "rgba(0, 0, 0, 1)" }}
+                        animate={{ opacity: isHovered ? 1 : 0.9 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <motion.div 
+                          className="w-10 h-10 sm:w-12 sm:h-12 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden mx-auto md:mx-0 flex-shrink-0"
+                          whileHover={{ scale: 1.1 }}
+                        >
                           <Image
                             src={item.logo || "/placeholder.svg"}
                             alt={item.company}
@@ -253,52 +278,73 @@ export default function AboutMe() {
                             className="rounded-full"
                             style={{ color: "rgba(228, 221, 221, 1)" }}
                           />
-                        </div>
-                        <div className="text-center md:text-left">
-                          <h3 className="text-base md:text-lg font-bold text-white">{item.role}</h3>
+                        </motion.div>
+                        <div className="text-center md:text-left flex-1 min-w-0">
+                          <h3 className="text-sm sm:text-base md:text-base font-bold text-white leading-tight line-clamp-1">{item.role}</h3>
                           <h4
-                            className="text-sm md:text-base text-purple-400"
+                            className="text-xs sm:text-sm text-purple-400 leading-tight line-clamp-1"
                             style={{ color: "rgba(209, 35, 114, 1)" }}
                           >
                             {item.company}
                           </h4>
-                          <div className="flex items-center justify-center md:justify-start gap-1.5 text-gray-400 mt-0.5">
-                            <Calendar className="w-3 h-3" />
-                            <span className="text-xs">{item.period}</span>
-                          </div>
-                          <div className="flex items-center justify-center md:justify-start gap-1.5 text-gray-400">
-                            <MapPin className="w-3 h-3" />
-                            <span className="text-xs">{item.location}</span>
-                          </div>
-                          <div className="flex items-center justify-center md:justify-start gap-1.5 text-gray-400">
-                            <Building2 className="w-3 h-3" />
-                            <span className="text-xs">{item.type}</span>
-                          </div>
+                          <motion.div 
+                            className="flex items-center justify-center md:justify-start gap-0.5 text-gray-400 mt-0.5 text-xs flex-wrap"
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: isHovered ? 1 : 0, height: isHovered ? "auto" : 0 }}
+                            transition={{ duration: 0.3 }}
+                            style={{ overflow: "hidden" }}
+                          >
+                            <Calendar className="w-2.5 h-2.5 flex-shrink-0" />
+                            <span className="text-xs whitespace-nowrap">{item.period}</span>
+                            <span className="hidden sm:inline text-xs">•</span>
+                            <MapPin className="w-2.5 h-2.5 hidden sm:inline flex-shrink-0" />
+                            <span className="hidden sm:inline text-xs whitespace-nowrap">{item.location}</span>
+                            <span className="hidden sm:inline text-xs">•</span>
+                            <Building2 className="w-2.5 h-2.5 hidden sm:inline flex-shrink-0" />
+                            <span className="hidden sm:inline text-xs whitespace-nowrap">{item.type}</span>
+                          </motion.div>
                         </div>
-                      </div>
-                      {item.skills.length > 0 && (
-                        <div className="flex flex-wrap justify-center md:justify-start gap-1.5 mt-2">
-                          {item.skills.map((skill, skillIndex) => (
-                            <span
-                              key={skillIndex}
-                              className="px-2 py-0.5 text-xs rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-300 border border-purple-500/20"
-                              style={{ borderColor: skillIndex === 0 ? "rgba(240, 0, 0, 0.2)" : undefined }}
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                      </motion.div>
+
+                      {/* Skills - Show on hover */}
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: isHovered ? 1 : 0, height: isHovered ? "auto" : 0 }}
+                        transition={{ duration: 0.3 }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        {item.skills.length > 0 && (
+                          <div className="flex flex-wrap justify-center md:justify-start gap-1 mt-1.5">
+                            {item.skills.map((skill, skillIndex) => (
+                              <motion.span
+                                key={skillIndex}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: skillIndex * 0.05 }}
+                                className="px-1.5 py-0.5 text-xs rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-300 border border-purple-500/20 whitespace-nowrap"
+                                style={{ borderColor: skillIndex === 0 ? "rgba(240, 0, 0, 0.2)" : undefined }}
+                              >
+                                {skill}
+                              </motion.span>
+                            ))}
+                          </div>
+                        )}
+                      </motion.div>
+                    </motion.div>
 
                     {/* Timeline Point (hidden on mobile) */}
-                    <div
-                      className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full hidden md:block"
+                    <motion.div
+                      className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full hidden md:block"
                       style={{
                         backgroundImage: "linear-gradient(135deg, rgba(237, 7, 7, 1) 0%, rgba(249, 228, 6, 1) 100%)",
-                        boxShadow: "0 0 12px rgba(237,7,7,0.35)",
                       }}
-                    ></div>
+                      animate={{ 
+                        boxShadow: isHovered 
+                          ? ["0 0 12px rgba(237,7,7,0.5)", "0 0 20px rgba(237,7,7,0.8)", "0 0 12px rgba(237,7,7,0.5)"]
+                          : "0 0 12px rgba(237,7,7,0.35)"
+                      }}
+                      transition={{ duration: 1.5, repeat: isHovered ? Infinity : 0 }}
+                    ></motion.div>
 
                     {/* Timeline Connector (hidden on mobile) */}
                     {index < timelineData.length - 1 && (
@@ -316,7 +362,8 @@ export default function AboutMe() {
                       ></motion.div>
                     )}
                   </motion.div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           </div>
