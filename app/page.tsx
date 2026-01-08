@@ -236,31 +236,25 @@ export default function Home() {
               <div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 overflow-hidden">
                   <motion.span
-                    className="inline-block bg-clip-text text-transparent text-2xl md:text-3xl lg:text-4xl"
+                    className="inline-block text-lg md:text-xl lg:text-2xl font-normal"
                     initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 0.5, x: 0 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                     style={{
                       fontFamily: '"Noto Color Emoji"',
-                      backgroundImage:
-                        "linear-gradient(178deg, rgba(255, 0, 0, 1) 42%, rgba(236, 72, 153, 1) 50%, rgba(255, 234, 0, 1) 100%)",
-                      WebkitBackgroundClip: "text",
-                      color: "transparent",
+                      color: "rgb(148, 163, 184)",
                     }}
                   >
                     Hey!{" "}
                   </motion.span>
                   <motion.span
-                    className="inline-block bg-clip-text text-transparent text-2xl md:text-3xl lg:text-4xl"
+                    className="inline-block text-lg md:text-xl lg:text-2xl font-normal"
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 0.5, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
                     style={{
                       fontFamily: '"Noto Color Emoji"',
-                      backgroundImage:
-                        "linear-gradient(178deg, rgba(255, 0, 0, 1) 42%, rgba(236, 72, 153, 1) 50%, rgba(255, 234, 0, 1) 100%)",
-                      WebkitBackgroundClip: "text",
-                      color: "transparent",
+                      color: "rgb(148, 163, 184)",
                     }}
                   >
                     It's{" "}
