@@ -16,7 +16,7 @@ export default function Loading() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentLangIndex((prev) => (prev + 1) % languages.length)
-    }, 400) // Change language every 0.7 seconds
+    }, 400) // Change language every 0.7 seconds.
 
     return () => clearInterval(interval)
   }, [])
