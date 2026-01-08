@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- GirlScript Summer of Code Logo -->
+  <rect width="400" height="400" fill="#1a1a1a"/>
+  
+  <!-- Decorative corners -->
+  <circle cx="80" cy="80" r="40" fill="#6B7280"/>
+  <circle cx="320" cy="80" r="40" fill="#6B7280"/>
+  <circle cx="80" cy="320" r="40" fill="#6B7280"/>
+  <circle cx="320" cy="320" r="40" fill="#6B7280"/>
+  
+  <!-- Wave shapes -->
+  <ellipse cx="120" cy="60" rx="40" ry="50" fill="#FF5722"/>
+  <ellipse cx="200" cy="80" rx="50" ry="40" fill="#FFC107"/>
+  <ellipse cx="260" cy="60" rx="40" ry="50" fill="#FF5722"/>
+  
+  <ellipse cx="120" cy="340" rx="40" ry="50" fill="#FFC107"/>
+  <ellipse cx="280" cy="340" rx="40" ry="50" fill="#FFC107"/>
+  
+  <!-- Center badge -->
+  <circle cx="200" cy="200" r="120" fill="#FF5722" opacity="0.9"/>
+  <circle cx="200" cy="200" r="100" fill="white"/>
+  <circle cx="200" cy="200" r="80" fill="#FF5722"/>
+  
+  <!-- Code symbol -->
+  <text x="200" y="230" text-anchor="middle" fill="white" font-size="80" font-family="monospace" font-weight="bold">&lt;/&gt;</text>
+</svg>

@@ -5,15 +5,6 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { Calendar, MapPin, Building2 } from "lucide-react"
 
-const createLogoDataUri = (text: string) =>
-  `data:image/svg+xml,${encodeURIComponent(
-    `<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>` +
-      `<defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='#ed0707'/><stop offset='1' stop-color='#f9e406'/></linearGradient></defs>` +
-      `<rect width='64' height='64' rx='12' fill='url(#g)'/>` +
-      `<text x='50%' y='55%' text-anchor='middle' fill='white' font-size='22' font-family='Inter, Arial, sans-serif' font-weight='700'>${text}</text>` +
-    `</svg>`
-  )}`
-
 const timelineData = [
   {
     id: 1,
@@ -22,7 +13,7 @@ const timelineData = [
     period: "oct 2024 - nov 2024",
     location: "Remote",
     type: "Part-time",
-    logo: createLogoDataUri("GS"),
+    logo: "/logos/girlscript.svg",
     skills: ["JavaScript", "React", "Node.js"],
   },
   {
@@ -32,77 +23,77 @@ const timelineData = [
     period: "Jan 2025 Jan 2025",
     location: "Remote",
     type: "Part-time",
-    logo: createLogoDataUri("GS"),
+    logo: "/logos/goldman-sachs.svg",
     skills: ["React", "Next.js", "Tailwind CSS"],
   },
   {
-    id: 2,
+    id: 3,
     company: "Deloitte",
     role: "Data Analyst - Internship (Job Simulation)",
     period: "Apr 2025 - Apr 2025",
     location: "Remote",
     type: "Part-time",
-    logo: createLogoDataUri("DE"),
+    logo: "/logos/deloitte.svg",
     skills: ["React", "Next.js", "Tailwind CSS"],
   },
   {
-    id: 2,
+    id: 4,
     company: "GeeksforGeeks Sister Nivedita University (SNU) Chapter",
     role: "Technical Executive",
     period: "Mar 2025 - Present",
     location: "Kolkata, WB",
     type: "Full-time",
-    logo: createLogoDataUri("GfG"),
+    logo: "/logos/geeksforgeeks.png",
     skills: ["React", "Next.js", "Tailwind CSS"],
   },
    {
-    id: 1,
+    id: 5,
     company: "HackQuest",
     role: "Developer Advocate",
     period: "Apr 2025 - Present",
     location: "Remote",
     type: "Part-time",
-    logo: createLogoDataUri("HQ"),
+    logo: "/logos/hackquest.png",
     skills: ["JavaScript", "React", "Node.js"],
   },
    {
-    id: 1,
+    id: 6,
     company: "Hack4Bengal 4.0",
     role: "Evangelist",
     period: "Apr 2025 - July 2025 ",
     location: "Remote",
     type: "Part-time",
-    logo: createLogoDataUri("H4B"),
+    logo: "/logos/hack4bengal.png",
     skills: ["JavaScript", "React", "Node.js"],
   },
    {
-    id: 1,
+    id: 7,
     company: "AI Wallah",
     role: "Generative AI Developer Intern",
     period: "May 2025 - June 2025",
     location: "Remote",
     type: "Part-time",
-    logo: createLogoDataUri("AI"),
+    logo: "/logos/aiwallah.png",
     skills: ["JavaScript", "React", "Node.js"],
   },
   {
-    id: 1,
+    id: 8,
     company: "Snaapify",
     role: "Full Stack Developer",
     period: "July 2025 - current",
     location: "Hybrid",
     type: "Full - Time",
-    logo: createLogoDataUri("SN"),
+    logo: "/logos/snaapify.png",
     skills: ["Typescript", "Nextjs", "express.js" , "MongoDB"],
   },
    {
-    id: 1,
+    id: 9,
     company: "Stellar",
     role: "Ambassador & Developer",
     period: "Jan 2026 - current",
     location: "Remote",
     type: "Full - Time",
-    logo: createLogoDataUri("SL"),
+    logo: "/logos/stellar.png",
     skills: ["Typescript", "Nextjs", "express.js" , "MongoDB"],
   },
 ]
@@ -234,95 +225,156 @@ export default function AboutMe() {
               ></div>
 
               {/* Timeline Items */}
-              <div className="space-y-3 md:space-y-4">
+              <div className="space-y-2 md:space-y-2.5">
                 {timelineData.map((item, index) => {
                   const [isHovered, setIsHovered] = useState(false)
                   return (
                   <motion.div
                     key={`${item.id}-${index}`}
-                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
                     whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.08, type: "spring", stiffness: 100 }}
-                    viewport={{ once: true, margin: "0px 0px -100px 0px" }}
-                    className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-3 lg:gap-4 relative group`}
+                    transition={{ duration: 0.4, delay: index * 0.05, type: "spring", stiffness: 120 }}
+                    viewport={{ once: true, margin: "0px 0px -50px 0px" }}
+                    className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-2 lg:gap-2.5 relative group`}
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                   >
                     {/* Content */}
                     <motion.div 
-                      className="w-full md:w-1/2 p-2.5 sm:p-3 md:p-3 bg-gray-900/50 rounded-lg backdrop-blur-sm border border-gray-800 transition-all duration-300 cursor-pointer"
-                      whileHover={{ scale: 1.02, backgroundColor: "rgba(18, 18, 18, 0.8)" }}
+                      className="w-full md:w-1/2 bg-black/80 backdrop-blur-sm border rounded-lg cursor-pointer overflow-hidden"
+                      animate={{
+                        padding: isHovered ? "16px" : "10px",
+                        backgroundColor: isHovered ? "rgba(10, 10, 10, 0.95)" : "rgba(0, 0, 0, 0.8)"
+                      }}
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -3
+                      }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                       style={{
-                        color: "rgba(5, 5, 5, 1)",
-                        backgroundColor: isHovered ? "rgba(18, 18, 18, 0.8)" : "rgba(18, 18, 18, 0.5)",
-                        borderColor: isHovered ? "rgba(237, 7, 7, 1)" : "rgba(250, 0, 0, 1)",
-                        fontFamily: '"__nextjs-Geist Mono"',
-                        boxShadow: isHovered ? "0 0 20px rgba(237, 7, 7, 0.3)" : "none"
+                        borderColor: isHovered ? "rgba(237, 7, 7, 0.9)" : "rgba(237, 7, 7, 0.4)",
+                        boxShadow: isHovered 
+                          ? "0 0 25px rgba(237, 7, 7, 0.3), 0 0 15px rgba(249, 228, 6, 0.2), inset 0 0 20px rgba(237, 7, 7, 0.05)" 
+                          : "0 2px 8px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(237, 7, 7, 0.02)",
+                        fontFamily: '"Courier New", monospace'
                       }}
                     >
                       <motion.div 
-                        className="flex flex-col md:flex-row items-center gap-2 sm:gap-3" 
-                        style={{ color: "rgba(0, 0, 0, 1)" }}
+                        className="flex flex-col md:flex-row items-center gap-2 sm:gap-2.5" 
                         animate={{ opacity: isHovered ? 1 : 0.9 }}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.25 }}
                       >
                         <motion.div 
-                          className="w-10 h-10 sm:w-12 sm:h-12 md:w-10 md:h-10 rounded-full bg-gray-800 flex items-center justify-center overflow-hidden mx-auto md:mx-0 flex-shrink-0"
-                          whileHover={{ scale: 1.1 }}
+                          className="rounded-lg bg-black/40 flex items-center justify-center overflow-hidden mx-auto md:mx-0 flex-shrink-0 border border-red-900/30"
+                          animate={{
+                            width: isHovered ? "48px" : "36px",
+                            height: isHovered ? "48px" : "36px"
+                          }}
+                          whileHover={{ borderColor: "rgba(237, 7, 7, 0.7)" }}
+                          transition={{ duration: 0.3 }}
+                          style={{
+                            boxShadow: isHovered ? "0 0 15px rgba(237, 7, 7, 0.3)" : "0 1px 4px rgba(0, 0, 0, 0.4)",
+                          }}
                         >
                           <Image
                             src={item.logo || "/placeholder.svg"}
                             alt={item.company}
                             width={48}
                             height={48}
-                            className="rounded-full"
-                            style={{ color: "rgba(228, 221, 221, 1)" }}
+                            className="w-full h-full object-contain"
+                            style={{ 
+                              filter: isHovered ? "brightness(1.15) drop-shadow(0 0 5px rgba(237, 7, 7, 0.3))" : "brightness(0.95)",
+                              transition: "filter 0.3s ease",
+                              padding: isHovered ? "4px" : "2px"
+                            }}
                           />
                         </motion.div>
                         <div className="text-center md:text-left flex-1 min-w-0">
-                          <h3 className="text-sm sm:text-base md:text-base font-bold text-white leading-tight line-clamp-1">{item.role}</h3>
-                          <h4
-                            className="text-xs sm:text-sm text-purple-400 leading-tight line-clamp-1"
-                            style={{ color: "rgba(209, 35, 114, 1)" }}
+                          <motion.h3 
+                            className="font-bold text-white leading-tight mb-0.5"
+                            animate={{
+                              fontSize: isHovered ? "14px" : "12px",
+                              lineHeight: isHovered ? "1.3" : "1.2"
+                            }}
+                            transition={{ duration: 0.3 }}
+                            style={{
+                              display: "-webkit-box",
+                              WebkitLineClamp: isHovered ? 2 : 1,
+                              WebkitBoxOrient: "vertical",
+                              overflow: "hidden"
+                            }}
+                          >{item.role}</motion.h3>
+                          <motion.h4
+                            className="font-medium leading-tight"
+                            animate={{
+                              fontSize: isHovered ? "13px" : "11px",
+                              color: isHovered ? "rgba(237, 7, 7, 1)" : "rgba(249, 228, 6, 0.9)"
+                            }}
+                            transition={{ duration: 0.3 }}
+                            style={{
+                              display: "-webkit-box",
+                              WebkitLineClamp: 1,
+                              WebkitBoxOrient: "vertical",
+                              overflow: "hidden"
+                            }}
                           >
                             {item.company}
-                          </h4>
+                          </motion.h4>
                           <motion.div 
-                            className="flex items-center justify-center md:justify-start gap-0.5 text-gray-400 mt-0.5 text-xs flex-wrap"
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: isHovered ? 1 : 0, height: isHovered ? "auto" : 0 }}
-                            transition={{ duration: 0.3 }}
+                            className="flex items-center justify-center md:justify-start gap-1 text-gray-500 flex-wrap"
+                            initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                            animate={{ 
+                              opacity: isHovered ? 1 : 0, 
+                              height: isHovered ? "auto" : 0,
+                              marginTop: isHovered ? "8px" : 0
+                            }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
                             style={{ overflow: "hidden" }}
                           >
-                            <Calendar className="w-2.5 h-2.5 flex-shrink-0" />
-                            <span className="text-xs whitespace-nowrap">{item.period}</span>
-                            <span className="hidden sm:inline text-xs">•</span>
-                            <MapPin className="w-2.5 h-2.5 hidden sm:inline flex-shrink-0" />
-                            <span className="hidden sm:inline text-xs whitespace-nowrap">{item.location}</span>
-                            <span className="hidden sm:inline text-xs">•</span>
-                            <Building2 className="w-2.5 h-2.5 hidden sm:inline flex-shrink-0" />
-                            <span className="hidden sm:inline text-xs whitespace-nowrap">{item.type}</span>
+                            <div className="flex items-center gap-0.5 text-xs">
+                              <Calendar className="w-2.5 h-2.5 flex-shrink-0" style={{ color: "rgba(237, 7, 7, 0.8)" }} />
+                              <span className="whitespace-nowrap">{item.period}</span>
+                            </div>
+                            <span className="text-xs text-red-800">│</span>
+                            <div className="flex items-center gap-0.5 text-xs">
+                              <MapPin className="w-2.5 h-2.5 flex-shrink-0" style={{ color: "rgba(237, 7, 7, 0.8)" }} />
+                              <span className="whitespace-nowrap">{item.location}</span>
+                            </div>
+                            <span className="text-xs text-red-800">│</span>
+                            <div className="flex items-center gap-0.5 text-xs">
+                              <Building2 className="w-2.5 h-2.5 flex-shrink-0" style={{ color: "rgba(237, 7, 7, 0.8)" }} />
+                              <span className="whitespace-nowrap">{item.type}</span>
+                            </div>
                           </motion.div>
                         </div>
                       </motion.div>
 
                       {/* Skills - Show on hover */}
                       <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: isHovered ? 1 : 0, height: isHovered ? "auto" : 0 }}
-                        transition={{ duration: 0.3 }}
+                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                        animate={{ 
+                          opacity: isHovered ? 1 : 0, 
+                          height: isHovered ? "auto" : 0,
+                          marginTop: isHovered ? "10px" : 0
+                        }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
                         style={{ overflow: "hidden" }}
                       >
                         {item.skills.length > 0 && (
-                          <div className="flex flex-wrap justify-center md:justify-start gap-1 mt-1.5">
+                          <div className="flex flex-wrap justify-center md:justify-start gap-1.5">
                             {item.skills.map((skill, skillIndex) => (
                               <motion.span
                                 key={skillIndex}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: skillIndex * 0.05 }}
-                                className="px-1.5 py-0.5 text-xs rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 text-purple-300 border border-purple-500/20 whitespace-nowrap"
-                                style={{ borderColor: skillIndex === 0 ? "rgba(240, 0, 0, 0.2)" : undefined }}
+                                transition={{ delay: skillIndex * 0.04 }}
+                                className="px-2 py-0.5 text-xs font-mono rounded whitespace-nowrap"
+                                style={{ 
+                                  background: "rgba(237, 7, 7, 0.1)",
+                                  color: "rgba(249, 228, 6, 0.95)",
+                                  border: "1px solid rgba(237, 7, 7, 0.4)",
+                                  boxShadow: "0 1px 4px rgba(237, 7, 7, 0.2)"
+                                }}
                               >
                                 {skill}
                               </motion.span>
@@ -334,30 +386,33 @@ export default function AboutMe() {
 
                     {/* Timeline Point (hidden on mobile) */}
                     <motion.div
-                      className="absolute left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full hidden md:block"
+                      className="absolute left-1/2 transform -translate-x-1/2 rounded-full hidden md:block"
+                      animate={{
+                        width: isHovered ? "10px" : "6px",
+                        height: isHovered ? "10px" : "6px"
+                      }}
                       style={{
                         backgroundImage: "linear-gradient(135deg, rgba(237, 7, 7, 1) 0%, rgba(249, 228, 6, 1) 100%)",
                       }}
-                      animate={{ 
-                        boxShadow: isHovered 
-                          ? ["0 0 12px rgba(237,7,7,0.5)", "0 0 20px rgba(237,7,7,0.8)", "0 0 12px rgba(237,7,7,0.5)"]
-                          : "0 0 12px rgba(237,7,7,0.35)"
+                      whileHover={{ 
+                        boxShadow: ["0 0 10px rgba(237,7,7,0.6)", "0 0 18px rgba(237,7,7,0.9)", "0 0 10px rgba(237,7,7,0.6)"]
                       }}
-                      transition={{ duration: 1.5, repeat: isHovered ? Infinity : 0 }}
+                      transition={{ duration: 0.3 }}
                     ></motion.div>
 
                     {/* Timeline Connector (hidden on mobile) */}
                     {index < timelineData.length - 1 && (
                       <motion.div
-                        initial={{ height: 0 }}
-                        whileInView={{ height: "100%" }}
-                        transition={{ duration: 0.5, delay: (index + 1) * 0.1 }}
-                        className="absolute left-1/2 transform -translate-x-1/2 w-0.5 hidden md:block"
+                        initial={{ scaleY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        transition={{ duration: 0.4, delay: (index + 1) * 0.08 }}
+                        className="absolute left-1/2 transform -translate-x-1/2 hidden md:block origin-top"
                         style={{
                           top: "100%",
-                          height: "100px",
+                          width: "1px",
+                          height: "10px",
                           backgroundImage:
-                            "linear-gradient(180deg, rgba(237, 7, 7, 0.85) 0%, rgba(249, 228, 6, 0.75) 100%)",
+                            "linear-gradient(180deg, rgba(237, 7, 7, 0.6) 0%, rgba(249, 228, 6, 0.4) 100%)",
                         }}
                       ></motion.div>
                     )}

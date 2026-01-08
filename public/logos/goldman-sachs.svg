@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Goldman Sachs Logo -->
+  <rect width="400" height="400" fill="#7FA9D0"/>
+  
+  <!-- GS Letters -->
+  <text x="200" y="280" text-anchor="middle" fill="#1a1a1a" font-size="200" font-family="Georgia, serif" font-weight="bold">GS</text>
+</svg>
