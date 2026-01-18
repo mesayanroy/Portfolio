@@ -179,7 +179,7 @@ export default function Home() {
     setMounted(true)
     const timer = setTimeout(() => {
       setLoading(false)
-    }, 3300) // Show loading for 4 seconds
+    }, 2000) // Show loading for 2 seconds
 
     return () => clearTimeout(timer)
   }, [])
@@ -257,6 +257,7 @@ export default function Home() {
                     It's{" "}
                   </motion.span>
                   <br className="block md:hidden" />
+                  <div className="block md:inline" style={{ minHeight: "1em" }}></div>
                   <motion.span
                     className="inline-block bg-clip-text text-transparent relative"
                     initial={{ opacity: 0, scale: 0.8 }}
@@ -278,7 +279,7 @@ export default function Home() {
                       color: "transparent",
                     }}
                   >
-                    Sayan{" "}Roy
+                    Sayan Roy
                     <motion.span
                       className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-yellow-500/20 blur-xl -z-10 rounded-lg"
                       animate={{
