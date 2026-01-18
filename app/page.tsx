@@ -179,7 +179,7 @@ export default function Home() {
     setMounted(true)
     const timer = setTimeout(() => {
       setLoading(false)
-    }, 3100) // Show loading for 4 seconds
+    }, 3300) // Show loading for 4 seconds
 
     return () => clearTimeout(timer)
   }, [])
