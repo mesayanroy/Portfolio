@@ -197,6 +197,192 @@ export default function AboutMe() {
             </div>
           </div>
 
+          {/* Education Section */}
+          <div className="mb-10 lg:mb-12">
+            <h3
+              className="text-xl md:text-2xl font-bold mb-8 text-center"
+              style={{ fontFamily: "-apple-system" }}
+            >
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: "linear-gradient(0deg, rgba(239, 68, 68, 1) 0%, rgba(236, 72, 153, 1) 45%, rgba(249, 115, 22, 1) 100%)",
+                  WebkitBackgroundClip: "text",
+                  color: "transparent",
+                }}
+              >
+                
+              </span>
+              <span className="ml-2 text-white">🎓</span>
+            </h3>
+
+            {/* Compact Education Bars */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+              {[
+                {
+                  degree: "Bachelor of Technology",
+                  field: "Computer Science Engineering",
+                  institution: "Sister Nivedita University",
+                  year: "2024 - 2028",
+                  status: "ongoing",
+                  icon: "🏫",
+                  barGradient: "from-red-600/25 via-pink-600/20 to-amber-500/20",
+                  glow: "linear-gradient(135deg, rgba(248,113,113,0.6) 0%, rgba(236,72,153,0.45) 45%, rgba(249,115,22,0.4) 100%)",
+                  statusColor: "emerald"
+                },
+                {
+                  degree: "Higher Secondary Education",
+                  field: "Science Stream",
+                  institution: "Haryana Vidya Mandir School",
+                  year: "2022 - 2024",
+                  status: "completed",
+                  icon: "📚",
+                  barGradient: "from-rose-600/25 via-red-500/20 to-amber-500/15",
+                  glow: "linear-gradient(135deg, rgba(244,63,94,0.55) 0%, rgba(248,113,113,0.45) 40%, rgba(251,191,36,0.35) 100%)",
+                  statusColor: "sky"
+                },
+                {
+                  degree: "Secondary Education",
+                  field: "General Studies",
+                  institution: "St. Mary's High School",
+                  year: "2015 - 2022",
+                  status: "completed",
+                  icon: "🎒",
+                  barGradient: "from-amber-600/25 via-orange-500/20 to-red-600/15",
+                  glow: "linear-gradient(135deg, rgba(251,191,36,0.55) 0%, rgba(249,115,22,0.45) 45%, rgba(239,68,68,0.35) 100%)",
+                  statusColor: "sky"
+                }
+              ].map((edu, index) => {
+                const [isHovered, setIsHovered] = useState(false)
+
+                const codeLines = [
+                  "// education record",
+                  "struct education {",
+                  `  const char *institution = \"${edu.institution}\";`,
+                  `  const char *degree      = \"${edu.degree}\";`,
+                  `  const char *field       = \"${edu.field}\";`,
+                  `  const char *year_range  = \"${edu.year}\";`,
+                  `  const char *status      = \"${edu.status === "ongoing" ? "in_progress" : "completed"}\";`,
+                  "};",
+                ]
+
+                const toggleHover = () => setIsHovered((prev) => !prev)
+
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    onClick={toggleHover}
+                    className="relative group cursor-pointer"
+                  >
+                    {/* Animated Border Glow */}
+                    <motion.div
+                      className="absolute -inset-0.5 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ backgroundImage: edu.glow }}
+                    />
+
+                    {/* Main Bar */}
+                    <motion.div
+                      animate={{
+                        height: isHovered ? "auto" : "60px",
+                        paddingTop: isHovered ? "16px" : "12px",
+                        paddingBottom: isHovered ? "16px" : "12px"
+                      }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className={`relative bg-gradient-to-br ${edu.barGradient} backdrop-blur-md border rounded-lg overflow-hidden p-4 border-red-500/30 hover:border-amber-400/60`}
+                      style={{
+                        boxShadow: isHovered
+                          ? "0 10px 30px rgba(248,113,113,0.25), 0 4px 14px rgba(236,72,153,0.2)"
+                          : "0 2px 8px rgba(0,0,0,0.35)"
+                      }}
+                    >
+                      {/* Header - Always visible */}
+                      <motion.div
+                        animate={{ marginBottom: isHovered ? "12px" : "0px" }}
+                        transition={{ duration: 0.3 }}
+                        className="flex items-start gap-3"
+                      >
+                        <span className="text-lg md:text-xl flex-shrink-0">{edu.icon}</span>
+                        <div className="flex-1 min-w-0">
+                          <motion.h4
+                            animate={{ fontSize: isHovered ? "14px" : "13px" }}
+                            transition={{ duration: 0.3 }}
+                            className="font-bold text-white leading-tight truncate"
+                          >
+                            {edu.institution}
+                          </motion.h4>
+                          <motion.p
+                            animate={{ 
+                              fontSize: isHovered ? "12px" : "11px",
+                              opacity: isHovered ? 1 : 0.85,
+                              color: isHovered ? "rgba(255,255,255,0.92)" : "rgba(226,232,240,0.85)"
+                            }}
+                            transition={{ duration: 0.3 }}
+                            className="mt-0.5 truncate"
+                          >
+                            {edu.year}
+                          </motion.p>
+                          {/* Status Badge - appears on hover */}
+                          <motion.div
+                            initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                            animate={{
+                              opacity: isHovered ? 1 : 0,
+                              height: isHovered ? "auto" : 0,
+                              marginTop: isHovered ? "6px" : 0
+                            }}
+                            transition={{ duration: 0.3 }}
+                            style={{ overflow: "hidden" }}
+                          >
+                            <span className={`inline-block text-[11px] font-bold px-2 py-1 rounded-full ${
+                              edu.status === "ongoing"
+                                ? "bg-emerald-500/25 text-emerald-200 border border-emerald-400/50"
+                                : "bg-sky-500/25 text-sky-200 border border-sky-400/50"
+                            }`}>
+                              {edu.status === "ongoing" ? "▶ In Progress" : "✓ Completed"}
+                            </span>
+                          </motion.div>
+                        </div>
+                      </motion.div>
+
+                      {/* Details - Show on hover */}
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{
+                          opacity: isHovered ? 1 : 0,
+                          height: isHovered ? "auto" : 0
+                        }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        style={{ overflow: "hidden" }}
+                      >
+                        <div className="border-t border-white/10 pt-3">
+                          <motion.div
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.05 }}
+                            className="rounded-md bg-black/50 border border-red-500/30 p-3 font-mono text-[11px] md:text-xs leading-relaxed text-gray-200"
+                            style={{
+                              boxShadow: "inset 0 0 10px rgba(0,0,0,0.35), 0 4px 20px rgba(0,0,0,0.25)",
+                              textAlign: "left"
+                            }}
+                          >
+                            <pre className="whitespace-pre-wrap leading-relaxed text-left">
+{codeLines.map((line, idx) => ` ${line}`).join("\n")}
+                            </pre>
+                          </motion.div>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </div>
+
           {/* Timeline Section */}
           <div className="mb-8 lg:mb-10">
             <h3

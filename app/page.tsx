@@ -29,8 +29,6 @@ import AboutMe from "@/components/about-me"
 import Loading from "@/components/loading"
 import InteractiveShapes from "@/components/InteractiveShapes"
 import AnimatedBoxes from "@/components/AnimatedBoxes"
-import ChatBubble from "@/components/chat-bubble"
-import ChatbotOverlay from "@/components/chatbot-overlay"
 import LiveClock from "@/components/live-clock"
 import { TypingAnimation } from "@/components/ui/typing-animation"
 
@@ -174,7 +172,6 @@ const contributions: Contribution[] = [
 export default function Home() {
   const [mounted, setMounted] = useState(false)
   const [loading, setLoading] = useState(true)
-  const [chatbotOpen, setChatbotOpen] = useState(false)
   const [activeProjectIndex, setActiveProjectIndex] = useState(0)
   const [activeWorkTab, setActiveWorkTab] = useState<"projects" | "contributions">("projects")
 
@@ -1077,9 +1074,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      {/* Chatbot */}
-      <ChatBubble onClick={() => setChatbotOpen(true)} isOpen={chatbotOpen} />
-      <ChatbotOverlay isOpen={chatbotOpen} onClose={() => setChatbotOpen(false)} />
     </div>
   )
 }

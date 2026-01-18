@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Sayan Roy, a Blockchain Developer and Full Stack Engineer specializing in Web3 technologies.",
   generator: "Next.js",
+  icons: {
+    icon: "https://i.ibb.co/S4K4HCsY/sayanprofilepic.jpg",
+  },
 }
 
 export default function RootLayout({
