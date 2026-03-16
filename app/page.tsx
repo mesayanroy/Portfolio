@@ -1028,7 +1028,7 @@ export default function Home() {
                     <span className="sm:hidden">Book</span>
                   </motion.a>
                   <motion.a
-                    href="https://drive.google.com/file/d/185Yp16hl8GX7TDkBnD0ILd68qlRHgSWQ/view?usp=drive_link"
+                    href="/Sayan-Roy-Resume-mar-2026.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.02, y: -2 }}
